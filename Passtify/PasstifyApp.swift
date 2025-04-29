@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+private let appAssembler: AppAssembler = AppAssembler()
 
 @main
 struct PasstifyApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppRootCoordinatorView(coordinator: appAssembler.resolver.resolved(AppRootCoordinator.self))
         }
     }
 }
