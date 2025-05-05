@@ -23,6 +23,10 @@ class ObjectNavigationPath {
   private var objects: [any NavigationObject] = []
   
   private let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
+    
+    func count() -> Int {
+        return objects.count
+    }
   
   var last: (any NavigationObject)? {
     self.objects.last

@@ -9,8 +9,21 @@ import Swinject
 
 class ServiceAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(AuthServiceProtocol.self) { _ in
-            AuthService()
+        container.register(PasswordServiceProtocol.self) { r in
+            PasswordService()
+        }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
+        
+        
+        container.register(FirebaseServiceProtocol.self) { r in
+            FirebaseService()
+        }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
+        
+        container.register(GoogleServiceProtocol.self) { r in
+            GoogleService()
+        }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
+        
+        container.register(AuthServiceProtocol.self) { r in
+            AuthService(googleService: r.resolved(GoogleServiceProtocol.self), firebaseService: r.resolved(FirebaseServiceProtocol.self))
         }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
     }
 }

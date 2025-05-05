@@ -15,7 +15,7 @@ class LoginViewModel: ViewModel {
     private let authService: AuthServiceProtocol
     private weak var delegate: LoginViewModelDelegate?
     private var cancellables = Set<AnyCancellable>()
-    var googleLoginSubject: PassthroughSubject<Void, Never> = PassthroughSubject()
+    
     
     init(authService: AuthServiceProtocol) {
         self.authService = authService
@@ -28,10 +28,19 @@ class LoginViewModel: ViewModel {
     }
     
     private func bind() {
-        googleLoginSubject
-            .sink { [weak self] in
-                self?.authService.signInWithGoogle()
-            }.store(in: &cancellables)
+    }
+    
+    func signInWithGoogle() {
+        authService.signInWithGoogle()
+            .sink { [weak self] completion in
+                if case let .failure(error) = completion {
+                    print(error)
+                }
+            } receiveValue: { [weak self] user in
+                print("login success \(user)")
+            }
+            .store(in: &cancellables)
+        
     }
     
 }

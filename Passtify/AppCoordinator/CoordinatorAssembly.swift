@@ -9,7 +9,7 @@ import Swinject
 class CoordinatorAssembly: Assembly {
     func assemble(container: Container) {
         container.register(AppRootCoordinator.self) { r in
-            AppRootCoordinator(resolver: r)
+            AppRootCoordinator(resolver: r, authService: r.resolved(AuthServiceProtocol.self))
         }.inObjectScope(.container) // Tạo một instance duy nhất trong toàn bộ container (singleton).
     }
 }

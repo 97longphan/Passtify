@@ -27,7 +27,7 @@ struct LoginView: View {
                 }
 
                 Button(action: {
-                    viewModel.googleLoginSubject.send(())
+                    viewModel.signInWithGoogle()
                 }) {
                     HStack {
                         Image("google")
@@ -52,5 +52,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(viewModel: LoginViewModel(authService: AuthService()))
+    LoginView(viewModel: LoginViewModel(authService: AuthService(googleService: GoogleService(), firebaseService: FirebaseService())))
 }
