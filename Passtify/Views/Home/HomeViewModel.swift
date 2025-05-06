@@ -12,13 +12,11 @@ protocol HomeViewModelDelegate: AnyObject {
     func didPressPassword()
 }
 
-@Observable
-
 class HomeViewModel: ViewModel {
     private weak var delegate: HomeViewModelDelegate?
     private var cancellables = Set<AnyCancellable>()
     
-    var categories: [HomeItemCategoryModel] = HomeItemCategoryType.allCases.map {
+    @Published var categories: [HomeItemCategoryModel] = HomeItemCategoryType.allCases.map {
         HomeItemCategoryModel(type: $0, count: 0)
     }
     
@@ -29,6 +27,7 @@ class HomeViewModel: ViewModel {
     }
     
     private func bind() {
+        // Implement Combine bindings if needed
     }
     
     func handleCategoryTap(item: HomeItemCategoryModel) {

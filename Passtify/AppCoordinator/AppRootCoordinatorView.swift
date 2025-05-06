@@ -8,35 +8,22 @@
 import SwiftUI
 
 struct AppRootCoordinatorView: View {
-    @Bindable var coordinator: AppRootCoordinator
-    @State private var newPasswordViewModel: NewPasswordViewModel?
-    
+    @ObservedObject var coordinator: AppRootCoordinator
+
     var body: some View {
-        ObjectNavigationStack(path: coordinator.path) {
-            if coordinator.isLoggedIn {
-                AnyView(homeView())
-            } else {
-                AnyView(LoginView(viewModel: coordinator.loginViewModel))
-            }
+        NavigationStack(path: $coordinator.path) {
+            HomeView(viewModel: coordinator.homeViewModel)
+                .navigationDestination(for: AppRoute.self) { route in
+                    switch route {
+                    case .passwordList(let vm):
+                        PasswordListView(viewModel: vm)
+                    case .detailPassword(let vm):
+                        DetailPasswordView(viewModel: vm)
+                    }
+                }
         }
-        .onChange(of: self.coordinator.newPasswordViewModel, initial: true) { _, value in
-            self.newPasswordViewModel = value
+        .sheet(item: $coordinator.newPasswordViewModel) { vm in
+            NewPasswordView(viewModel: vm)
         }
-    }
-    
-    private func homeView() -> some View {
-        HomeView(viewModel: coordinator.homeViewModel)
-            .navigationDestination(for: PasswordListViewModel.self, destination: { viewModel in
-                passwordListView(viewModel: viewModel)})
-            .onAppear {
-                print("long dev \(coordinator.path.count())")
-            }
-    }
-    
-    private func passwordListView(viewModel: PasswordListViewModel) -> some View {
-        PasswordListView(viewModel: viewModel)
-            .sheet(item: $newPasswordViewModel) { viewModel in
-                NewPasswordView(viewModel: viewModel)
-            }
     }
 }

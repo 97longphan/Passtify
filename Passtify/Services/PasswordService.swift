@@ -11,14 +11,29 @@ protocol PasswordServiceProtocol {
     func savePasswords(_ passwords: [PasswordItemModel]) -> AnyPublisher<Void, Error>
     func loadPasswords() -> AnyPublisher<[PasswordItemModel], Error>
     func addPassword(_ password: PasswordItemModel) -> AnyPublisher<[PasswordItemModel], Error>
+    func updatePassword(_ updatedItem: PasswordItemModel) -> AnyPublisher<Void, Error>
+    func deletePassword(_ item: PasswordItemModel) -> AnyPublisher<Void, Error>
 }
 
 final class PasswordService: PasswordServiceProtocol {
+    let fileService = FileService()
+    let masterPassword = "12345"
+    
+    func deletePassword(_ item: PasswordItemModel) -> AnyPublisher<Void, Error> {
+        return loadPasswords()
+            .flatMap { currentPasswords -> AnyPublisher<Void, Error> in
+                let updatedPasswords = currentPasswords.filter { $0.id != item.id }
+                return self.savePasswords(updatedPasswords)
+            }
+            .eraseToAnyPublisher()
+    }
+    
     func savePasswords(_ passwords: [PasswordItemModel]) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
             do {
                 let encoded = try JSONEncoder().encode(passwords)
-                try encoded.write(to: self.getFileURL())
+                let encrypted = try CryptoManager.encrypt(data: encoded, password: self.masterPassword)
+                try encrypted.write(to: self.passwordUrl())
                 promise(.success(()))
             } catch {
                 promise(.failure(error))
@@ -42,13 +57,14 @@ final class PasswordService: PasswordServiceProtocol {
     func loadPasswords() -> AnyPublisher<[PasswordItemModel], Error> {
         return Future<[PasswordItemModel], Error> { promise in
             do {
-                let data = try Data(contentsOf: self.getFileURL())
-                let decodedPasswords = try JSONDecoder().decode([PasswordItemModel].self, from: data)
-                promise(.success(decodedPasswords))
+                let encryptedData = try Data(contentsOf: self.passwordUrl())
+                let decryptedData = try CryptoManager.decrypt(encryptedData: encryptedData, password: self.masterPassword)
+                let decoded = try JSONDecoder().decode([PasswordItemModel].self, from: decryptedData)
+                let sorted = decoded.sorted { $0.creationDate > $1.creationDate }
+                promise(.success(sorted))
             } catch {
-                // Xử lý trường hợp file không tồn tại hoặc lỗi decoding
                 if (error as NSError).code == NSFileReadNoSuchFileError {
-                    promise(.success([])) // Trả về mảng rỗng nếu file không tồn tại
+                    promise(.success([]))
                 } else {
                     promise(.failure(error))
                 }
@@ -57,7 +73,27 @@ final class PasswordService: PasswordServiceProtocol {
         .eraseToAnyPublisher()
     }
     
-    func getFileURL() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("passwords.json")
+    func updatePassword(_ updatedItem: PasswordItemModel) -> AnyPublisher<Void, Error> {
+        return loadPasswords()
+            .flatMap { (currentPasswords: [PasswordItemModel]) -> AnyPublisher<Void, Error> in
+                if let index = currentPasswords.firstIndex(where: { $0.id == updatedItem.id }) {
+                    var updatedPasswords = currentPasswords
+                    updatedPasswords[index] = updatedItem
+                    return self.savePasswords(updatedPasswords)
+                } else {
+                    return Fail(error: NSError(domain: "", code: 404, userInfo: [
+                        NSLocalizedDescriptionKey: "Password item not found"
+                    ]))
+                    .eraseToAnyPublisher()
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    
+    private func passwordUrl() -> URL {
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            .appendingPathComponent("passwords.enc")
+        return url
     }
 }

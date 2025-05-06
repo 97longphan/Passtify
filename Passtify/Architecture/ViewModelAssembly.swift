@@ -9,6 +9,10 @@ import Swinject
 
 class ViewModelAssembly: Assembly {
     func assemble(container: Container) {
+        container.register(DetailPasswordViewModel.self) { (r, item: PasswordItemModel) in
+            DetailPasswordViewModel(passwordItem: item, passwordService: r.resolved(PasswordServiceProtocol.self))
+        }.inObjectScope(.transient)
+        
         container.register(LoginViewModel.self) { r in
             LoginViewModel(authService: r.resolved(AuthServiceProtocol.self))
         }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.

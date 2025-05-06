@@ -7,12 +7,20 @@
 
 import Foundation
 
-struct PasswordItemModel: Identifiable, Codable {
+struct PasswordItemModel: Identifiable, Codable, Equatable, Hashable {
     var id = UUID()
-    var name: String
-    var encryptedPassword: String
+    var label: String
+    var userName: String
+    var password: String
     var creationDate = Date()
     var notes: String?
-
-    // Có thể thêm các thuộc tính khác nếu cần
+    
+    static var empty: PasswordItemModel {
+        PasswordItemModel(
+            label: "",
+            userName: "",
+            password: "",
+            notes: nil
+        )
+    }
 }

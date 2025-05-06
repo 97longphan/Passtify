@@ -8,58 +8,88 @@
 import Foundation
 import Swinject
 import FirebaseAuth
+import SwiftUI
 
-@Observable
-class AppRootCoordinator: ViewModel {
-    private(set) var loginViewModel: LoginViewModel!
-    private(set) var homeViewModel: HomeViewModel!
-    private let resolver: Resolver
-    private let authService: AuthServiceProtocol
-    let path = ObjectNavigationPath()
-    var isLoggedIn: Bool = false
-    var newPasswordViewModel: NewPasswordViewModel?
-    private var passwordListViewModel: PasswordListViewModel?
+enum AppRoute: Hashable {
+    case passwordList(PasswordListViewModel)
+    case detailPassword(DetailPasswordViewModel)
+}
+
+
+class AppRootCoordinator: ObservableObject {
+    @Published var path: [AppRoute] = []
+    @Published var newPasswordViewModel: NewPasswordViewModel?
     
-    init(resolver: Resolver, authService: AuthServiceProtocol) {
-        self.authService = authService
+    @Published private(set) var homeViewModel: HomeViewModel!
+    @Published var passwordListViewModel: PasswordListViewModel?
+    @Published var detailPasswordViewModel: DetailPasswordViewModel?
+    
+    let resolver: Resolver
+    
+    init(resolver: Resolver) {
         self.resolver = resolver
-        self.loginViewModel = self.resolver.resolved(LoginViewModel.self).setup(delegate: self)
-        self.homeViewModel = self.resolver.resolved(HomeViewModel.self).setup(delegate: self)
-        checkUserLogin()
+        self.homeViewModel = resolver.resolved(HomeViewModel.self).setup(delegate: self)
     }
     
-    func checkUserLogin() {
-        Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            self?.isLoggedIn = user != nil
+    func pushToPasswordList() {
+        let vm = resolver.resolved(PasswordListViewModel.self).setup(delegate: self)
+        path.append(.passwordList(vm))
+    }
+    
+    func pushToDetailPassword(item: PasswordItemModel) {
+        let vm = resolver.resolved(DetailPasswordViewModel.self, argument: item).setup(delegate: self)
+        path.append(.detailPassword(vm))
+    }
+    
+    func presentNewPassword() {
+        newPasswordViewModel = resolver.resolved(NewPasswordViewModel.self).setup(delegate: self)
+    }
+    
+    func pop() {
+        path.removeLast()
+    }
+}
+
+extension AppRootCoordinator {
+    func reloadPasswordList() {
+        if case let .passwordList(vm) = path.last {
+            vm.loadPasswords()
         }
     }
 }
 
-extension AppRootCoordinator: LoginViewModelDelegate {
-    
-}
-
 extension AppRootCoordinator: HomeViewModelDelegate {
     func didPressPassword() {
-        passwordListViewModel = resolver.resolved(PasswordListViewModel.self).setup(delegate: self)
-        path.append(passwordListViewModel!)
+        pushToPasswordList()
     }
 }
 
 extension AppRootCoordinator: PasswordListViewModelDelegate {
+    func didSelectItem(item: PasswordItemModel) {
+        pushToDetailPassword(item: item)
+    }
+    
     func didCreateNewPassword() {
-        newPasswordViewModel = resolver.resolved(NewPasswordViewModel.self).setup(delegate: self)
+        presentNewPassword()
+    }
+}
+
+extension AppRootCoordinator: DetailPasswordViewModelDelegate {
+    func didDeletedPassword() {
+        pop()
+        reloadPasswordList()
     }
 }
 
 extension AppRootCoordinator: NewPasswordViewModelDelegate {
     func didCreatedNewPassword() {
         newPasswordViewModel = nil
-        passwordListViewModel?.loadPasswords()
+        reloadPasswordList()
+        
     }
     
     func dismissNewPassword() {
         newPasswordViewModel = nil
     }
-    
 }
+

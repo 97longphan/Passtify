@@ -10,7 +10,6 @@ import Foundation
 
 protocol LoginViewModelDelegate: AnyObject {}
 
-@Observable
 class LoginViewModel: ViewModel {
     private let authService: AuthServiceProtocol
     private weak var delegate: LoginViewModelDelegate?

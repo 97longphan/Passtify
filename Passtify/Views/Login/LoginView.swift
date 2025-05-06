@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Bindable var viewModel: LoginViewModel
+    @ObservedObject var viewModel: LoginViewModel
     
     var body: some View {
             VStack(spacing: 40) {

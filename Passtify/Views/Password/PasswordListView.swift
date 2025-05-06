@@ -8,23 +8,40 @@
 import SwiftUI
 
 struct PasswordListView: View {
-    @Bindable var viewModel: PasswordListViewModel
-    
+    @ObservedObject var viewModel: PasswordListViewModel
+    @State private var searchTerm = ""
+
+    // Lọc danh sách theo searchTerm
+    private var filteredList: [PasswordItemModel] {
+        if searchTerm.isEmpty {
+            return viewModel.passwordList
+        } else {
+            return viewModel.passwordList.filter {
+                $0.label.localizedCaseInsensitiveContains(searchTerm) ||
+                $0.userName.localizedCaseInsensitiveContains(searchTerm)
+            }
+        }
+    }
+
     var body: some View {
         VStack {
             List {
-                ForEach(viewModel.passwordList) { item in
-                    PasswordListItemView(passwordItem: item)
-                        .listRowInsets(EdgeInsets()) // Loại bỏ insets mặc định
-                }
-                .onDelete { _ in
-                    print("Delete")
+                ForEach(filteredList) { item in
+                    Button {
+                        viewModel.onActionSelectItem(item: item)
+                    } label: {
+                        PasswordListItemView(passwordItem: item)
+                            .listRowInsets(EdgeInsets())
+                    }
                 }
             }
-            .listStyle(.plain)
-            .background(Color(uiColor: .systemBackground))
+            .listStyle(PlainListStyle())
+            .background(Color(UIColor.systemBackground))
             .navigationTitle("Tất cả")
+            .searchable(text: $searchTerm, prompt: "Tìm kiếm")
+
             Spacer()
+
             HStack {
                 Spacer()
                 Button(action: {
@@ -33,7 +50,6 @@ struct PasswordListView: View {
                     Image(systemName: "plus")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .font(.largeTitle)
                         .foregroundColor(.accentColor)
                 }
                 .padding()
@@ -42,6 +58,10 @@ struct PasswordListView: View {
     }
 }
 
+
+
 #Preview {
     PasswordListView(viewModel: PasswordListViewModel(passwordService: PasswordService()))
 }
+
+

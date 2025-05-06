@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct NewPasswordView: View {
-    @Bindable var viewModel: NewPasswordViewModel
-    
-    @State private var title: String = ""
-    @State private var username: String = ""
-    @State private var password: String = ""
-    @State private var note: String = ""
+    @ObservedObject var viewModel: NewPasswordViewModel
     
     var body: some View {
         NavigationView {
@@ -25,7 +20,7 @@ struct NewPasswordView: View {
                             .foregroundColor(.yellow)
                             .padding(.leading, 4)
                         
-                        TextField("Trang web hoặc nhãn", text: $title)
+                        TextField("Trang web hoặc nhãn", text: $viewModel.input.label)
                             .font(.headline)
                     }
                     .padding(.vertical, 4)
@@ -33,7 +28,7 @@ struct NewPasswordView: View {
                     HStack {
                         Text("Tên người dùng")
                         Spacer()
-                        TextField("người dùng", text: $username)
+                        TextField("người dùng", text: $viewModel.input.userName)
                             .multilineTextAlignment(.trailing)
                             .foregroundColor(.gray)
                     }
@@ -41,47 +36,45 @@ struct NewPasswordView: View {
                     HStack {
                         Text("Mật khẩu")
                         Spacer()
-                        SecureField("mật khẩu", text: $password)
+                        SecureField("mật khẩu", text: $viewModel.input.password)
                             .multilineTextAlignment(.trailing)
                             .foregroundColor(.gray)
                     }
                 }
                 
                 Section(header: Text("GHI CHÚ").font(.caption).foregroundColor(.gray)) {
-                    TextEditor(text: $note)
+                    ZStack(alignment: .topLeading) {
+                        TextEditor(text: Binding(
+                            get: { viewModel.input.notes ?? "" },
+                            set: { viewModel.input.notes = $0.isEmpty ? nil : $0 }
+                        ))
                         .frame(height: 100)
-                        .foregroundColor(note.isEmpty ? .gray : .primary)
-                        .overlay(
-                            Group {
-                                if note.isEmpty {
-                                    Text("Thêm Ghi chú")
-                                        .foregroundColor(.gray)
-                                        .padding(.top, 8)
-                                        .padding(.horizontal, 5)
-                                }
-                            }, alignment: .topLeading
-                        )
-                }
-            }
-            .navigationTitle("Mật khẩu mới")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Hủy") {
-                        viewModel.onDissmissNewPassword()
+                        .foregroundColor((viewModel.input.notes ?? "").isEmpty ? .gray : .primary)
+                        
+                        if (viewModel.input.notes ?? "").isEmpty {
+                            Text("Thêm Ghi chú")
+                                .foregroundColor(.gray)
+                                .padding(.top, 8)
+                                .padding(.horizontal, 5)
+                        }
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Lưu") {
-                        viewModel.onSaveNewPassword()
-                    }
-                    .bold()
-                }
             }
+            .navigationBarTitle("Mật khẩu mới", displayMode: .inline)
+            .navigationBarItems(
+                leading: Button("Hủy") {
+                    viewModel.onDissmissNewPassword()
+                },
+                trailing: Button("Lưu") {
+                    viewModel.onSaveNewPassword()
+                }
+                .bold()
+                .disabled(!viewModel.isFormValid())
+            )
         }
-        
     }
 }
+
 
 #Preview {
     NewPasswordView(viewModel: NewPasswordViewModel(passwordService: PasswordService()))

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @Bindable var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     
     var body: some View {
         ScrollView {
@@ -17,10 +17,10 @@ struct HomeView: View {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
                     TextField("Tìm kiếm", text: .constant(""))
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 }
                 .padding(10)
-                .background(Color(.secondarySystemBackground))
+                .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(10)
                 .padding(.horizontal)
                 
@@ -32,7 +32,6 @@ struct HomeView: View {
                             HomeCardItemView(item: item)
                         }
                         .buttonStyle(PlainButtonStyle())
-                        
                     }
                 }
                 .padding(.horizontal)
@@ -51,7 +50,7 @@ struct HomeView: View {
                         Spacer()
                     }
                     .padding()
-                    .background(Color(.secondarySystemBackground))
+                    .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
                 }
                 .padding(.top)
@@ -59,9 +58,10 @@ struct HomeView: View {
             }
             .padding(.top)
         }
-        .navigationTitle("Mật khẩu")
+        .navigationBarTitle("Mật khẩu")
     }
 }
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

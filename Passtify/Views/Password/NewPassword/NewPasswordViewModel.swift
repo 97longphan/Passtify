@@ -12,8 +12,9 @@ protocol NewPasswordViewModelDelegate: AnyObject {
     func didCreatedNewPassword()
 }
 
-@Observable
 class NewPasswordViewModel: ViewModel {
+    @Published var input = PasswordItemModel.empty
+    
     private weak var delegate: NewPasswordViewModelDelegate?
     private let passwordService: PasswordServiceProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -33,17 +34,23 @@ class NewPasswordViewModel: ViewModel {
     }
     
     func onSaveNewPassword() {
-        passwordService.addPassword(PasswordItemModel(name: "long", encryptedPassword: "123"))
+        passwordService.addPassword(input)
             .sink { completion in
                 if case let .failure(error) = completion {
                     print(error)
                 }
             } receiveValue: { [weak self] _ in
                 self?.delegate?.didCreatedNewPassword()
-            }.store(in: &cancellables)
-
+            }
+            .store(in: &cancellables)
     }
     
-    private func bind() {
+    func isFormValid() -> Bool {
+        !input.label.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !input.userName.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !input.password.trimmingCharacters(in: .whitespaces).isEmpty
     }
+    
+    private func bind() {}
 }
+
