@@ -68,8 +68,8 @@ struct NewPasswordView: View {
                 trailing: Button("Lưu") {
                     viewModel.onSaveNewPassword()
                 }
-                .bold()
-                .disabled(!viewModel.isFormValid())
+                    .bold()
+                    .disabled(!viewModel.isFormValid())
             )
         }
     }

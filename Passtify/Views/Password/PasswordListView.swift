@@ -10,7 +10,7 @@ import SwiftUI
 struct PasswordListView: View {
     @ObservedObject var viewModel: PasswordListViewModel
     @State private var searchTerm = ""
-
+    
     // Lọc danh sách theo searchTerm
     private var filteredList: [PasswordItemModel] {
         if searchTerm.isEmpty {
@@ -22,7 +22,7 @@ struct PasswordListView: View {
             }
         }
     }
-
+    
     var body: some View {
         VStack {
             List {
@@ -39,9 +39,9 @@ struct PasswordListView: View {
             .background(Color(UIColor.systemBackground))
             .navigationTitle("Tất cả")
             .searchable(text: $searchTerm, prompt: "Tìm kiếm")
-
+            
             Spacer()
-
+            
             HStack {
                 Spacer()
                 Button(action: {

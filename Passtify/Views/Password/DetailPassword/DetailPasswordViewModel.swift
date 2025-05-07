@@ -47,6 +47,6 @@ class DetailPasswordViewModel: ViewModel {
             } receiveValue: { [weak self] in
                 self?.delegate?.didDeletedPassword()
             }.store(in: &cancellables)
-
+        
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PasswordListItemView: View {
     let passwordItem: PasswordItemModel
-
+    
     var body: some View {
         HStack {
             // Hình tròn chứa chữ cái đầu tiên
@@ -21,7 +21,7 @@ struct PasswordListItemView: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
             }
-
+            
             VStack(alignment: .leading) {
                 Text(passwordItem.label)
                     .font(.headline)
@@ -31,9 +31,9 @@ struct PasswordListItemView: View {
                     .foregroundStyle(.secondary)
             }
             .padding(.leading, 8) // Khoảng cách giữa hình tròn và text
-
+            
             Spacer() // Đẩy các phần tử bên phải về cuối
-
+            
             // Icon dấu chấm than và mũi tên
             Image(systemName: "chevron.right")
                 .foregroundStyle(.gray)

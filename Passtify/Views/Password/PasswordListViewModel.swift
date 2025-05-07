@@ -16,24 +16,24 @@ class PasswordListViewModel: ViewModel {
     private weak var delegate: PasswordListViewModelDelegate?
     private let passwordService: PasswordServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-
+    
     @Published var passwordList: [PasswordItemModel] = []
     
     init(passwordService: PasswordServiceProtocol) {
         self.passwordService = passwordService
         loadPasswords()
     }
-
+    
     func setup(delegate: PasswordListViewModelDelegate) -> Self {
         self.delegate = delegate
         bind()
         return self
     }
-
+    
     private func bind() {
         // Optional Combine bindings here
     }
-
+    
     func onActionCreateNewPassword() {
         delegate?.didCreateNewPassword()
     }
@@ -41,7 +41,7 @@ class PasswordListViewModel: ViewModel {
     func onActionSelectItem(item: PasswordItemModel) {
         delegate?.didSelectItem(item: item)
     }
-
+    
     func loadPasswords() {
         passwordService.loadPasswords()
             .sink { completion in
