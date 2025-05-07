@@ -21,12 +21,15 @@
 		6B6F95522DC0CEF100C689FE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F954E2DC0CEF100C689FE /* ViewModel.swift */; };
 		6B6F95532DC0CEF100C689FE /* ViewModelAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F954F2DC0CEF100C689FE /* ViewModelAssembly.swift */; };
 		6B6F95592DC0CF3F00C689FE /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 6B6F95582DC0CF3F00C689FE /* Swinject */; };
-		6B6F955C2DC0CFAF00C689FE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F955B2DC0CFAF00C689FE /* LoginView.swift */; };
-		6B6F955F2DC0CFC400C689FE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F955E2DC0CFC400C689FE /* LoginViewModel.swift */; };
 		6B6F95622DC0D14800C689FE /* Resolver+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F95612DC0D14800C689FE /* Resolver+Extensions.swift */; };
 		6B6F95702DC0DC6B00C689FE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F956F2DC0DC6B00C689FE /* AuthService.swift */; };
 		6B6F95732DC0DF2500C689FE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 6B6F95722DC0DF2500C689FE /* GoogleSignIn */; };
-		6B7239582DCA158900F46D1E /* CustomDeletePasswordAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7239572DCA158900F46D1E /* CustomDeletePasswordAlert.swift */; };
+		6B7239752DCB16F100F46D1E /* DeletedPasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7239742DCB16F100F46D1E /* DeletedPasswordListView.swift */; };
+		6B7239762DCB16F100F46D1E /* DeletedPasswordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7239732DCB16F100F46D1E /* DeletedPasswordListViewModel.swift */; };
+		6B72397C2DCB1D9300F46D1E /* DetailDeletedPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B72397A2DCB1D9300F46D1E /* DetailDeletedPasswordViewModel.swift */; };
+		6B72397D2DCB1D9300F46D1E /* DetailDeletedPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B72397B2DCB1D9300F46D1E /* DetailDeletedPasswordView.swift */; };
+		6B7239802DCB478D00F46D1E /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B72397F2DCB478D00F46D1E /* AuthenticationView.swift */; };
+		6B7239882DCB527500F46D1E /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7239872DCB526E00F46D1E /* AuthenticationViewModel.swift */; };
 		6B89AA4D2DC14F0200A6A90D /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA4C2DC14EF700A6A90D /* UIApplication+Extensions.swift */; };
 		6B89AA4F2DC1518E00A6A90D /* GoogleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA4E2DC1518800A6A90D /* GoogleService.swift */; };
 		6B89AA522DC155E500A6A90D /* SignInError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA512DC155E300A6A90D /* SignInError.swift */; };
@@ -91,11 +94,15 @@
 		6B6F954D2DC0CEF100C689FE /* AppAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		6B6F954E2DC0CEF100C689FE /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6B6F954F2DC0CEF100C689FE /* ViewModelAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelAssembly.swift; sourceTree = "<group>"; };
-		6B6F955B2DC0CFAF00C689FE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		6B6F955E2DC0CFC400C689FE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		6B6F95612DC0D14800C689FE /* Resolver+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Resolver+Extensions.swift"; sourceTree = "<group>"; };
 		6B6F956F2DC0DC6B00C689FE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		6B7239572DCA158900F46D1E /* CustomDeletePasswordAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDeletePasswordAlert.swift; sourceTree = "<group>"; };
+		6B7239732DCB16F100F46D1E /* DeletedPasswordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedPasswordListViewModel.swift; sourceTree = "<group>"; };
+		6B7239742DCB16F100F46D1E /* DeletedPasswordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedPasswordListView.swift; sourceTree = "<group>"; };
+		6B72397A2DCB1D9300F46D1E /* DetailDeletedPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDeletedPasswordViewModel.swift; sourceTree = "<group>"; };
+		6B72397B2DCB1D9300F46D1E /* DetailDeletedPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDeletedPasswordView.swift; sourceTree = "<group>"; };
+		6B72397F2DCB478D00F46D1E /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		6B7239852DCB4ABC00F46D1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B7239872DCB526E00F46D1E /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		6B89AA4C2DC14EF700A6A90D /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		6B89AA4E2DC1518800A6A90D /* GoogleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleService.swift; sourceTree = "<group>"; };
 		6B89AA512DC155E300A6A90D /* SignInError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInError.swift; sourceTree = "<group>"; };
@@ -177,6 +184,7 @@
 		6B4D8BBC2DC0C93B00103278 /* Passtify */ = {
 			isa = PBXGroup;
 			children = (
+				6B7239852DCB4ABC00F46D1E /* Info.plist */,
 				6B7239562DCA158100F46D1E /* Helper */,
 				6B89AA532DC1FDB800A6A90D /* Models */,
 				6B89AA502DC155D200A6A90D /* Errors */,
@@ -244,20 +252,11 @@
 		6B6F955A2DC0CFA100C689FE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6B72397E2DCB472600F46D1E /* Authentication */,
 				6B89AA672DC32A0000A6A90D /* Password */,
 				6B89AA5E2DC2072400A6A90D /* Home */,
-				6B6F955D2DC0CFB800C689FE /* Login */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		6B6F955D2DC0CFB800C689FE /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				6B6F955B2DC0CFAF00C689FE /* LoginView.swift */,
-				6B6F955E2DC0CFC400C689FE /* LoginViewModel.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		6B6F95602DC0D14800C689FE /* Extensions */ = {
@@ -287,9 +286,45 @@
 		6B7239562DCA158100F46D1E /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				6B7239572DCA158900F46D1E /* CustomDeletePasswordAlert.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		6B7239712DCB15C800F46D1E /* DeletedPassword */ = {
+			isa = PBXGroup;
+			children = (
+				6B7239792DCB1D8A00F46D1E /* Detail */,
+				6B7239732DCB16F100F46D1E /* DeletedPasswordListViewModel.swift */,
+				6B7239742DCB16F100F46D1E /* DeletedPasswordListView.swift */,
+			);
+			path = DeletedPassword;
+			sourceTree = "<group>";
+		};
+		6B7239722DCB16C900F46D1E /* ListAll */ = {
+			isa = PBXGroup;
+			children = (
+				6B89AA682DC32A1800A6A90D /* PasswordListViewModel.swift */,
+				6B89AA6A2DC32A3200A6A90D /* PasswordListView.swift */,
+			);
+			path = ListAll;
+			sourceTree = "<group>";
+		};
+		6B7239792DCB1D8A00F46D1E /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				6B72397A2DCB1D9300F46D1E /* DetailDeletedPasswordViewModel.swift */,
+				6B72397B2DCB1D9300F46D1E /* DetailDeletedPasswordView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		6B72397E2DCB472600F46D1E /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				6B7239872DCB526E00F46D1E /* AuthenticationViewModel.swift */,
+				6B72397F2DCB478D00F46D1E /* AuthenticationView.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		6B89AA492DC14E8E00A6A90D /* Ultils */ = {
@@ -331,11 +366,11 @@
 		6B89AA672DC32A0000A6A90D /* Password */ = {
 			isa = PBXGroup;
 			children = (
+				6B7239722DCB16C900F46D1E /* ListAll */,
+				6B7239712DCB15C800F46D1E /* DeletedPassword */,
 				6BD94B362DC8B7E8005BF242 /* DetailPassword */,
 				6B89AA6C2DC32CC700A6A90D /* NewPassword */,
 				6B89AA732DC3427900A6A90D /* PasswordListItemView.swift */,
-				6B89AA682DC32A1800A6A90D /* PasswordListViewModel.swift */,
-				6B89AA6A2DC32A3200A6A90D /* PasswordListView.swift */,
 			);
 			path = Password;
 			sourceTree = "<group>";
@@ -518,7 +553,6 @@
 				6B6F954A2DC0CEDC00C689FE /* AppRootCoordinatorView.swift in Sources */,
 				6B89AA5B2DC201AD00A6A90D /* FirebaseUser+Extensions.swift in Sources */,
 				6B89AA6E2DC32CD600A6A90D /* NewPasswordViewModel.swift in Sources */,
-				6B7239582DCA158900F46D1E /* CustomDeletePasswordAlert.swift in Sources */,
 				6B89AA742DC3428D00A6A90D /* PasswordListItemView.swift in Sources */,
 				6B6F95482DC0CEDC00C689FE /* CoordinatorAssembly.swift in Sources */,
 				6B89AA662DC3257800A6A90D /* HomeItemCategoryModel.swift in Sources */,
@@ -533,16 +567,20 @@
 				6B89AA702DC32CE000A6A90D /* NewPasswordView.swift in Sources */,
 				6B6F95702DC0DC6B00C689FE /* AuthService.swift in Sources */,
 				6BF224AA2DC38BC00077F204 /* PasswordService.swift in Sources */,
-				6B6F955F2DC0CFC400C689FE /* LoginViewModel.swift in Sources */,
 				6B89AA642DC31F9300A6A90D /* HomeCardItemView.swift in Sources */,
-				6B6F955C2DC0CFAF00C689FE /* LoginView.swift in Sources */,
+				6B7239802DCB478D00F46D1E /* AuthenticationView.swift in Sources */,
 				6B89AA522DC155E500A6A90D /* SignInError.swift in Sources */,
 				6B89AA4F2DC1518E00A6A90D /* GoogleService.swift in Sources */,
+				6B7239752DCB16F100F46D1E /* DeletedPasswordListView.swift in Sources */,
+				6B7239762DCB16F100F46D1E /* DeletedPasswordListViewModel.swift in Sources */,
+				6B72397C2DCB1D9300F46D1E /* DetailDeletedPasswordViewModel.swift in Sources */,
+				6B72397D2DCB1D9300F46D1E /* DetailDeletedPasswordView.swift in Sources */,
 				6B6F95622DC0D14800C689FE /* Resolver+Extensions.swift in Sources */,
 				6B6F95522DC0CEF100C689FE /* ViewModel.swift in Sources */,
 				6B89AA552DC1FDC400A6A90D /* UserModel.swift in Sources */,
 				6B89AA5D2DC2030700A6A90D /* GIDGoogleUser+Extensions.swift in Sources */,
 				6BD94B2A2DC86CD2005BF242 /* CryptoManager.swift in Sources */,
+				6B7239882DCB527500F46D1E /* AuthenticationViewModel.swift in Sources */,
 				6BD94B2C2DC86D2D005BF242 /* FileServices.swift in Sources */,
 				6B89AA622DC2073A00A6A90D /* HomeView.swift in Sources */,
 				6B4D8BBE2DC0C93B00103278 /* PasstifyApp.swift in Sources */,

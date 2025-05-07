@@ -9,44 +9,45 @@ import SwiftUI
 
 enum HomeItemCategoryType: CaseIterable, Identifiable {
     case password
-    case passcodes
-    case keys
-    case wifi
-    case security
     case deleted
+    case importData
+    case exportData
     
     var id: Self { self }
     
     var title: String {
         switch self {
         case .password: return "Tất cả"
-        case .passcodes: return "Mã khóa"
-        case .keys: return "Mã"
-        case .wifi: return "Wi-Fi"
-        case .security: return "Bảo mật"
-        case .deleted: return "Đã xóa"
+        case .deleted: return "Đã xoá"
+        case .importData: return "Nhập dữ liệu"
+        case .exportData: return "Xuất dữ liệu"
         }
     }
     
     var iconName: String {
         switch self {
         case .password: return "key.fill"
-        case .passcodes: return "lock.shield.fill"
-        case .keys: return "key"
-        case .wifi: return "wifi"
-        case .security: return "checkmark.shield.fill"
         case .deleted: return "trash.fill"
+        case .importData: return "square.and.arrow.down.fill"
+        case .exportData: return "square.and.arrow.up.fill"
         }
     }
     
     var iconBackgroundColor: Color {
         switch self {
         case .password: return .blue
-        case .passcodes: return .green
-        case .keys: return .yellow
-        case .wifi: return .orange
-        case .security: return .gray
         case .deleted: return .red
+        case .importData: return .green
+        case .exportData: return .orange
+        }
+    }
+    
+    var isShowCount: Bool {
+        switch self {
+        case .password, .deleted:
+            return true
+        default:
+            return false
         }
     }
 }

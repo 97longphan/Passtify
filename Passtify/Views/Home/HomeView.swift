@@ -9,21 +9,11 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @State var searchTerm = ""
     
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.gray)
-                    TextField("Tìm kiếm", text: .constant(""))
-                        .foregroundColor(.primary)
-                }
-                .padding(10)
-                .background(Color(UIColor.secondarySystemBackground))
-                .cornerRadius(10)
-                .padding(.horizontal)
-                
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                     ForEach(viewModel.categories) { item in
                         Button(action: {
@@ -59,12 +49,16 @@ struct HomeView: View {
             .padding(.top)
         }
         .navigationBarTitle("Mật khẩu")
+        .searchable(text: $searchTerm, prompt: "Tìm kiếm")
+        .onAppear {
+            viewModel.loadCount()
+        }
     }
 }
 
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel())
+        HomeView(viewModel: HomeViewModel(passwordService: PasswordService()))
     }
 }

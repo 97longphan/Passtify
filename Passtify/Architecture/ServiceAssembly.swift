@@ -23,7 +23,7 @@ class ServiceAssembly: Assembly {
         }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
         
         container.register(AuthServiceProtocol.self) { r in
-            AuthService(googleService: r.resolved(GoogleServiceProtocol.self), firebaseService: r.resolved(FirebaseServiceProtocol.self))
+            AuthService()
         }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
     }
 }

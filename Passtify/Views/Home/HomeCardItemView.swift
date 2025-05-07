@@ -31,9 +31,11 @@ struct HomeCardItemView: View {
                             .foregroundStyle(.primary)
                     }
                     Spacer()
-                    Text("\(item.count) >")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                    if item.type.isShowCount {
+                        Text("\(item.count) >")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
                 }
                     .padding()
                 , alignment: .leading

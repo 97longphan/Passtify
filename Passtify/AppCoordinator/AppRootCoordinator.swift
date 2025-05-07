@@ -13,22 +13,27 @@ import SwiftUI
 enum AppRoute: Hashable {
     case passwordList(PasswordListViewModel)
     case detailPassword(DetailPasswordViewModel)
+    case deletedPasswordList(DeletedPasswordListViewModel)
+    case deletedDetailPassword(DetailDeletedPasswordViewModel)
 }
 
 
 class AppRootCoordinator: ObservableObject {
     @Published var path: [AppRoute] = []
     @Published var newPasswordViewModel: NewPasswordViewModel?
-    
     @Published private(set) var homeViewModel: HomeViewModel!
-    @Published var passwordListViewModel: PasswordListViewModel?
-    @Published var detailPasswordViewModel: DetailPasswordViewModel?
+    @Published private(set) var authenViewModel: AuthenticationViewModel!
+    @Published var didCancelLastAttempt = true
+    @Published var isAuthenticated = false
+    private let authService: AuthServiceProtocol = AuthService()
+    
     
     let resolver: Resolver
     
     init(resolver: Resolver) {
         self.resolver = resolver
         self.homeViewModel = resolver.resolved(HomeViewModel.self).setup(delegate: self)
+        self.authenViewModel = resolver.resolved(AuthenticationViewModel.self)
     }
     
     func pushToPasswordList() {
@@ -41,12 +46,37 @@ class AppRootCoordinator: ObservableObject {
         path.append(.detailPassword(vm))
     }
     
+    func pushToDeletedList() {
+        let vm = resolver.resolved(DeletedPasswordListViewModel.self).setup(delegate: self)
+        path.append(.deletedPasswordList(vm))
+    }
+    
+    func pushToDetailDeletedPassword(item: PasswordItemModel) {
+        let vm = resolver.resolved(DetailDeletedPasswordViewModel.self, argument: item).setup(delegate: self)
+        path.append(.deletedDetailPassword(vm))
+    }
+    
     func presentNewPassword() {
         newPasswordViewModel = resolver.resolved(NewPasswordViewModel.self).setup(delegate: self)
     }
     
     func pop() {
         path.removeLast()
+    }
+    
+    func auth(completion:  @escaping ((Bool) -> Void)) {
+        authService.authenticateUser { [weak self] success, errorCode in
+            DispatchQueue.main.async {
+                if success {
+                    self?.didCancelLastAttempt = false
+                } else {
+                    if errorCode == .userCancel || errorCode == .systemCancel {
+                        self?.didCancelLastAttempt = true
+                    }
+                }
+                completion(success)
+            }
+        }
     }
 }
 
@@ -56,9 +86,38 @@ extension AppRootCoordinator {
             vm.loadPasswords()
         }
     }
+    
+    func reloadDeletedPasswordList() {
+        if case let .deletedPasswordList(vm) = path.last {
+            vm.loadDeletedPasswords()
+        }
+    }
+}
+
+extension AppRootCoordinator: DetailDeletedPasswordViewModelDelegate {
+    func didRecoverPassword() {
+        pop()
+        reloadDeletedPasswordList()
+    }
+    
+    func didPermanentlyDeletePassword() {
+        pop()
+        reloadDeletedPasswordList()
+    }
+}
+
+extension AppRootCoordinator: DeletedPasswordListViewModelDelegate {
+    func didSelectDeletedItem(item: PasswordItemModel) {
+        pushToDetailDeletedPassword(item: item)
+    }
+    
 }
 
 extension AppRootCoordinator: HomeViewModelDelegate {
+    func didPressDeletedPassword() {
+        pushToDeletedList()
+    }
+    
     func didPressPassword() {
         pushToPasswordList()
     }

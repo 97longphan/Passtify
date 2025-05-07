@@ -5,34 +5,30 @@
 //  Created by LONGPHAN on 29/4/25.
 //
 
-import GoogleSignIn
 import Combine
-import FirebaseCore
-import FirebaseAuth
+import LocalAuthentication
 
 protocol AuthServiceProtocol {
-    func signInWithGoogle() -> AnyPublisher<UserModel, SignInError>
+    func authenticateUser(completion: @escaping (Bool, LAError.Code?) -> Void)
 }
 
 
 final class AuthService: AuthServiceProtocol {
-    private let googleService: GoogleServiceProtocol
-    private let firebaseService: FirebaseServiceProtocol
     
-    init(googleService: GoogleServiceProtocol,
-         firebaseService: FirebaseServiceProtocol) {
-        self.googleService = googleService
-        self.firebaseService = firebaseService
-    }
-    
-    func signInWithGoogle() -> AnyPublisher<UserModel, SignInError> {
-        googleService.getGoogleUser()
-            .map { $0.createGoogleAuthCredential() }
-            .flatMap { [firebaseService] credential in
-                firebaseService.signIn(with: credential)
+    func authenticateUser(completion: @escaping (Bool, LAError.Code?) -> Void) {
+        let context = LAContext()
+        let reason = "Xác thực để truy cập dữ liệu"
+        
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
+            if success {
+                completion(true, nil)
+            } else {
+                let laErrorCode = (error as? LAError)?.code
+                completion(false, laErrorCode)
             }
-            .eraseToAnyPublisher()
+        }
     }
-    
 }
+
+
 

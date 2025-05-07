@@ -21,12 +21,12 @@ class PasswordListViewModel: ViewModel {
     
     init(passwordService: PasswordServiceProtocol) {
         self.passwordService = passwordService
-        loadPasswords()
     }
     
     func setup(delegate: PasswordListViewModelDelegate) -> Self {
         self.delegate = delegate
         bind()
+        loadPasswords()
         return self
     }
     
