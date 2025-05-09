@@ -20,7 +20,8 @@ class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let passwordService: PasswordServiceProtocol
     private let fileService: FileServiceProtocol
-
+    @Published var toastMessage: String? = nil
+    
     init(passwordService: PasswordServiceProtocol, fileService: FileServiceProtocol) {
         self.passwordService = passwordService
         self.fileService = fileService
@@ -44,9 +45,9 @@ class HomeViewModel: ObservableObject {
             delegate?.didPressDeletedPassword()
         case .exportData:
             fileService.exportEncryptedDataAsZip()
-                .sink { completion in
+                .sink { [weak self] completion in
                     if case .failure(let error) = completion {
-                        print("Export failed:", error)
+                        self?.toastMessage = error.msg
                     }
                 } receiveValue: { [weak self] url in
                     self?.delegate?.didExportData(url: url)

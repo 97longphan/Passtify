@@ -11,40 +11,45 @@ import Combine
 import CryptoKit
 
 protocol FileServiceProtocol: AnyObject {
-    func exportEncryptedDataAsZip() -> AnyPublisher<URL, Error>
+    func exportEncryptedDataAsZip() -> AnyPublisher<URL, ExportError>
     func importEncryptedDataFromZip(_ zipURL: URL) -> AnyPublisher<Void, Error>
 }
 
 final class FileService: FileServiceProtocol {
-    func exportEncryptedDataAsZip() -> AnyPublisher<URL, Error> {
-        return Future<URL, Error> { promise in
+    func exportEncryptedDataAsZip() -> AnyPublisher<URL, ExportError> {
+        return Future<URL, ExportError> { promise in
             let fileManager = FileManager.default
-            
-            // Đường dẫn đến hai file cần zip
-            let passwordURL = self.passwordUrl()
-            let deletedPasswordURL = self.deletePasswordUrl()
-            
+
             do {
-                // Tạo thư mục tạm để chứa file zip
+                let passwordURL = self.passwordUrl()
+                let deletedPasswordURL = self.deletePasswordUrl()
+
+                // Bắt buộc phải có file passwords.enc
+                guard fileManager.fileExists(atPath: passwordURL.path) else {
+                    throw ExportError.noFile
+                }
+
                 let tempDirectory = fileManager.temporaryDirectory
                 let zipURL = tempDirectory.appendingPathComponent("PasswordsBackup.zip")
-                
-                // Xoá nếu đã tồn tại
+
                 if fileManager.fileExists(atPath: zipURL.path) {
                     try fileManager.removeItem(at: zipURL)
                 }
-                
-                // Tạo file zip
-                guard let archive = Archive(url: zipURL, accessMode: .create) else {
-                    throw NSError(domain: "ZIP", code: 1, userInfo: [NSLocalizedDescriptionKey: "Không tạo được file zip"])
-                }
-                
+
+                let archive = try Archive(url: zipURL, accessMode: .create)
+
                 try archive.addEntry(with: "passwords.enc", fileURL: passwordURL)
-                try archive.addEntry(with: "deletepasswords.enc", fileURL: deletedPasswordURL)
-                
+
+                if fileManager.fileExists(atPath: deletedPasswordURL.path) {
+                    try archive.addEntry(with: "deletepasswords.enc", fileURL: deletedPasswordURL)
+                }
+
                 promise(.success(zipURL))
-            } catch {
+            } catch let error as ExportError {
                 promise(.failure(error))
+            } catch {
+                // Nếu cần, bạn có thể thêm các loại ExportError khác ở đây
+                promise(.failure(.noFile)) // fallback mặc định
             }
         }
         .eraseToAnyPublisher()

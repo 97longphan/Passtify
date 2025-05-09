@@ -22,7 +22,6 @@ protocol PasswordServiceProtocol {
 }
 
 final class PasswordService: PasswordServiceProtocol {
-    private let fileService = FileService()
     private let masterPassword = "12345"
     
     func deletePassword(_ item: PasswordItemModel) -> AnyPublisher<Void, Error> {

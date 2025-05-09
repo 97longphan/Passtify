@@ -3,6 +3,7 @@ import Combine
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @EnvironmentObject var toastManager: ToastManager
     @State private var currentTip: String = "Click vô đây tôi cho bạn tip nè ^^"
     
     private let securityTips = [
@@ -68,6 +69,9 @@ struct HomeView: View {
         .onAppear {
             viewModel.loadCount()
         }
+        .onReceive(viewModel.$toastMessage.compactMap { $0 }) { msg in
+            toastManager.show(msg, type: .error)
+        }
     }
     
     private func updateTip() {
@@ -82,7 +86,7 @@ struct ListFooterView: View {
     var body: some View {
         HStack {
             Spacer()
-            Text("Passtify v1.0")
+            Text("Passtify \(Bundle.main.appVersionDisplay)")
                 .font(.footnote)
                 .foregroundColor(.gray)
             Spacer()
