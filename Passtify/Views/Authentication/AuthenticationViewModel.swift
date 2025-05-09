@@ -12,24 +12,26 @@ final class AuthenticationViewModel: ObservableObject {
     private let authService: AuthServiceProtocol
     private(set) var didCancelLastAttempt = false
     
-    
     init(authService: AuthServiceProtocol) {
         self.authService = authService
     }
     
     func authenticate(completion: @escaping (Bool) -> Void = { _ in }) {
+        #if targetEnvironment(simulator)
         completion(true)
-//        authService.authenticateUser { [weak self] success, errorCode in
-//            DispatchQueue.main.async {
-//                if success {
-//                    self?.didCancelLastAttempt = false
-//                } else {
-//                    if errorCode == .userCancel || errorCode == .systemCancel {
-//                        self?.didCancelLastAttempt = true
-//                    }
-//                }
-//                completion(success)
-//            }
-//        }
+        #else
+        authService.authenticateUser { [weak self] success, errorCode in
+            DispatchQueue.main.async {
+                if success {
+                    self?.didCancelLastAttempt = false
+                } else {
+                    if errorCode == .userCancel || errorCode == .systemCancel {
+                        self?.didCancelLastAttempt = true
+                    }
+                }
+                completion(success)
+            }
+        }
+        #endif
     }
 }
