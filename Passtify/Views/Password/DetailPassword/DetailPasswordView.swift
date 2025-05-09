@@ -9,12 +9,10 @@ import SwiftUI
 
 struct DetailPasswordView: View {
     @ObservedObject var viewModel: DetailPasswordViewModel
-
-    @State private var showCopiedToast = false
-    @State private var copiedTextLabel = ""
     @State private var editing = false
     @State private var tempItem: PasswordItemModel = .empty
     @State private var showActionSheetDelete = false
+    @EnvironmentObject var toastManager: ToastManager
 
     var body: some View {
         ScrollView {
@@ -58,7 +56,6 @@ struct DetailPasswordView: View {
                 }
             }
         }
-        .overlay(toastOverlay, alignment: .bottom)
     }
 
     private func HeaderCard() -> some View {
@@ -215,29 +212,7 @@ struct DetailPasswordView: View {
 
     private func copyToClipboard(_ value: String, label: String) {
         UIPasteboard.general.string = value
-        copiedTextLabel = label
-        withAnimation {
-            showCopiedToast = true
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            withAnimation {
-                showCopiedToast = false
-            }
-        }
+        toastManager.show("Đã sao chép \(label)")
     }
 
-    private var toastOverlay: some View {
-        Group {
-            if showCopiedToast {
-                Text("\(copiedTextLabel.capitalized) đã được sao chép")
-                    .font(.footnote)
-                    .padding()
-                    .background(Color(.systemGray4))
-                    .cornerRadius(12)
-                    .foregroundColor(.primary)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .padding(.bottom, 50)
-            }
-        }
-    }
 }

@@ -11,10 +11,23 @@ struct AppRootCoordinatorView: View {
     @ObservedObject var coordinator: AppRootCoordinator
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var session: AppSession
+    @EnvironmentObject var toastManager: ToastManager
     
     var body: some View {
         if session.isAuthenticated {
-            homeView()
+            ZStack {
+                homeView()
+                if toastManager.isPresented {
+                    VStack {
+                        Spacer()
+                        OverlayToastView(message: toastManager.message, type: toastManager.type)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                            .padding(.horizontal)
+                    }
+                }
+            }
+            
+            
         } else {
             AuthenticationView(viewModel: coordinator.authenViewModel)
         }
@@ -53,11 +66,11 @@ struct AppRootCoordinatorView: View {
 
 struct ShareSheet: UIViewControllerRepresentable {
     let activityItems: [Any]
-
+    
     func makeUIViewController(context: Context) -> UIActivityViewController {
         UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
     }
-
+    
     func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
 }
 
@@ -65,26 +78,26 @@ import UniformTypeIdentifiers
 
 struct DocumentPicker: UIViewControllerRepresentable {
     var onDocumentsPicked: (URL) -> Void
-
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(onDocumentsPicked: onDocumentsPicked)
     }
-
+    
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.zip], asCopy: true)
         picker.delegate = context.coordinator
         return picker
     }
-
+    
     func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {}
-
+    
     class Coordinator: NSObject, UIDocumentPickerDelegate {
         var onDocumentsPicked: (URL) -> Void
-
+        
         init(onDocumentsPicked: @escaping (URL) -> Void) {
             self.onDocumentsPicked = onDocumentsPicked
         }
-
+        
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             if let first = urls.first {
                 onDocumentsPicked(first)

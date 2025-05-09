@@ -17,11 +17,13 @@ struct PasstifyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var session = AppSession()
     @Environment(\.scenePhase) private var scenePhase
+    @StateObject private var toastManager = ToastManager()
     
     var body: some Scene {
         WindowGroup {
             AppRootCoordinatorView(coordinator: appAssembler.resolver.resolved(AppRootCoordinator.self))
                 .environmentObject(session)
+                .environmentObject(toastManager)
         }.onChange(of: scenePhase) { newValue in
             if newValue == .background {
                 session.isAuthenticated = false
