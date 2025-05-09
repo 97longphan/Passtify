@@ -22,8 +22,8 @@ struct PasstifyApp: App {
         WindowGroup {
             AppRootCoordinatorView(coordinator: appAssembler.resolver.resolved(AppRootCoordinator.self))
                 .environmentObject(session)
-        }.onChange(of: scenePhase) {
-            if scenePhase == .background {
+        }.onChange(of: scenePhase) { newValue in
+            if newValue == .background {
                 session.isAuthenticated = false
             }
         }

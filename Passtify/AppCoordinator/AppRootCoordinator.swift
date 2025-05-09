@@ -9,6 +9,10 @@ import Foundation
 import Swinject
 import FirebaseAuth
 import SwiftUI
+struct ExportFile: Identifiable {
+    let id = UUID()
+    let url: URL
+}
 
 enum AppRoute: Hashable {
     case passwordList(PasswordListViewModel)
@@ -25,6 +29,8 @@ class AppRootCoordinator: ObservableObject {
     @Published private(set) var authenViewModel: AuthenticationViewModel!
     @Published var didCancelLastAttempt = true
     @Published var isAuthenticated = false
+    @Published var exportFileURL: ExportFile?
+    @Published var isImportingZip: Bool = false
     private let authService: AuthServiceProtocol = AuthService()
     
     
@@ -58,6 +64,10 @@ class AppRootCoordinator: ObservableObject {
     
     func presentNewPassword() {
         newPasswordViewModel = resolver.resolved(NewPasswordViewModel.self).setup(delegate: self)
+    }
+    
+    func presentExportData(url: URL) {
+        exportFileURL = ExportFile(url: url)
     }
     
     func pop() {
@@ -114,6 +124,14 @@ extension AppRootCoordinator: DeletedPasswordListViewModelDelegate {
 }
 
 extension AppRootCoordinator: HomeViewModelDelegate {
+    func didImportData() {
+        isImportingZip = true
+    }
+    
+    func didExportData(url: URL) {
+        presentExportData(url: url)
+    }
+    
     func didPressDeletedPassword() {
         pushToDeletedList()
     }

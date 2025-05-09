@@ -11,16 +11,20 @@ import Foundation
 protocol HomeViewModelDelegate: AnyObject {
     func didPressPassword()
     func didPressDeletedPassword()
+    func didExportData(url: URL)
+    func didImportData()
 }
 
 class HomeViewModel: ViewModel {
     private weak var delegate: HomeViewModelDelegate?
     private var cancellables = Set<AnyCancellable>()
     private let passwordService: PasswordServiceProtocol
+    private let fileService: FileServiceProtocol
     
     
-    init(passwordService: PasswordServiceProtocol) {
+    init(passwordService: PasswordServiceProtocol, fileService: FileServiceProtocol) {
         self.passwordService = passwordService
+        self.fileService = fileService
     }
     
     @Published var categories: [HomeItemCategoryModel] = HomeItemCategoryType.allCases.map {
@@ -44,8 +48,29 @@ class HomeViewModel: ViewModel {
             delegate?.didPressPassword()
         case .deleted:
             delegate?.didPressDeletedPassword()
-        default: break
+        case .exportData:
+            fileService.exportEncryptedDataAsZip()
+                .sink { completion in
+                    if case .failure(let error) = completion {
+                        print("Export failed:", error)
+                    }
+                } receiveValue: { [weak self] url in
+                    self?.delegate?.didExportData(url: url)
+                }.store(in: &cancellables)
+        case .importData:
+            delegate?.didImportData()
         }
+    }
+    
+    func importDataFrom(url: URL) {
+        fileService.importEncryptedDataFromZip(url)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    print("Export failed:", error)
+                }
+            } receiveValue: { [weak self] _ in
+                self?.loadCount()
+            }.store(in: &cancellables)
     }
     
     private func updateCount(for type: HomeItemCategoryType, count: Int) {

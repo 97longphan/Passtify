@@ -27,7 +27,7 @@ class ViewModelAssembly: Assembly {
         }.inObjectScope(.transient)
         
         container.register(HomeViewModel.self) { r in
-            HomeViewModel(passwordService: r.resolved(PasswordServiceProtocol.self))
+            HomeViewModel(passwordService: r.resolved(PasswordServiceProtocol.self), fileService: r.resolved(FileServiceProtocol.self))
         }.inObjectScope(.transient)
         
         container.register(PasswordListViewModel.self) { r in

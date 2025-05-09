@@ -7,18 +7,13 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct AuthenticationView: View {
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var session: AppSession
     @ObservedObject var viewModel: AuthenticationViewModel
-
+    
     var body: some View {
         ZStack {
-            Color(UIColor.systemBackground)
-                .ignoresSafeArea()
-
             VStack(spacing: 24) {
                 VStack(spacing: 16) {
                     Image(systemName: "key.fill")
@@ -27,12 +22,12 @@ struct AuthenticationView: View {
                         .frame(width: 40, height: 40)
                         .foregroundColor(.yellow)
                     
-
+                    
                     Text("Mật khẩu đã bị khóa")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)
-
+                    
                     Button("Mở khóa") {
                         viewModel.authenticate { success in
                             if success {
@@ -44,7 +39,6 @@ struct AuthenticationView: View {
                     .foregroundColor(Color.blue)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color(UIColor.systemGray6))
                     .cornerRadius(14)
                 }
                 .padding(30)
@@ -53,8 +47,9 @@ struct AuthenticationView: View {
                 .shadow(color: Color.primary.opacity(0.15), radius: 12, x: 0, y: 4)
             }
             .padding()
-        }.onChange(of: scenePhase) {
-            if scenePhase == .active && !viewModel.didCancelLastAttempt {
+        }
+        .onChange(of: scenePhase) { newValue in
+            if newValue == .active && !viewModel.didCancelLastAttempt {
                 viewModel.authenticate { success in
                     if success {
                         session.isAuthenticated = true
@@ -66,3 +61,6 @@ struct AuthenticationView: View {
 }
 
 
+#Preview {
+    AuthenticationView(viewModel: AuthenticationViewModel(authService: AuthService()))
+}

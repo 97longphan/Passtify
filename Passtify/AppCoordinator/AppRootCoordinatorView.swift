@@ -40,5 +40,55 @@ struct AppRootCoordinatorView: View {
         .sheet(item: $coordinator.newPasswordViewModel) { vm in
             NewPasswordView(viewModel: vm)
         }
+        .sheet(item: $coordinator.exportFileURL) { file in
+            ShareSheet(activityItems: [file.url])
+        }
+        .sheet(isPresented: $coordinator.isImportingZip) {
+            DocumentPicker { pickedURL in
+                coordinator.homeViewModel.importDataFrom(url: pickedURL)
+            }
+        }
+    }
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let activityItems: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ controller: UIActivityViewController, context: Context) {}
+}
+
+import UniformTypeIdentifiers
+
+struct DocumentPicker: UIViewControllerRepresentable {
+    var onDocumentsPicked: (URL) -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(onDocumentsPicked: onDocumentsPicked)
+    }
+
+    func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.zip], asCopy: true)
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {}
+
+    class Coordinator: NSObject, UIDocumentPickerDelegate {
+        var onDocumentsPicked: (URL) -> Void
+
+        init(onDocumentsPicked: @escaping (URL) -> Void) {
+            self.onDocumentsPicked = onDocumentsPicked
+        }
+
+        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+            if let first = urls.first {
+                onDocumentsPicked(first)
+            }
+        }
     }
 }
