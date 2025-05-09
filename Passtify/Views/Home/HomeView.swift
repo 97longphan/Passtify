@@ -25,26 +25,6 @@ struct HomeView: View {
                     }
                 }
                 .padding(.horizontal)
-                
-                VStack(alignment: .leading) {
-                    Text("NHÓM ĐƯỢC CHIA SẺ")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                        .padding(.bottom, 5)
-                    
-                    HStack {
-                        Image(systemName: "person.2.fill")
-                            .foregroundColor(.blue)
-                        Text("Nhóm được chia sẻ mới")
-                            .foregroundColor(.blue)
-                        Spacer()
-                    }
-                    .padding()
-                    .background(Color(UIColor.secondarySystemBackground))
-                    .cornerRadius(10)
-                }
-                .padding(.top)
-                .padding(.horizontal)
             }
             .padding(.top)
         }
