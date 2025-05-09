@@ -154,7 +154,6 @@ extension AppRootCoordinator: PasswordListViewModelDelegate {
 extension AppRootCoordinator: DetailPasswordViewModelDelegate {
     func didDeletedPassword() {
         pop()
-        reloadPasswordList()
     }
 }
 

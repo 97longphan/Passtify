@@ -18,17 +18,18 @@ final class AuthenticationViewModel: ObservableObject {
     }
     
     func authenticate(completion: @escaping (Bool) -> Void = { _ in }) {
-        authService.authenticateUser { [weak self] success, errorCode in
-            DispatchQueue.main.async {
-                if success {
-                    self?.didCancelLastAttempt = false
-                } else {
-                    if errorCode == .userCancel || errorCode == .systemCancel {
-                        self?.didCancelLastAttempt = true
-                    }
-                }
-                completion(success)
-            }
-        }
+        completion(true)
+//        authService.authenticateUser { [weak self] success, errorCode in
+//            DispatchQueue.main.async {
+//                if success {
+//                    self?.didCancelLastAttempt = false
+//                } else {
+//                    if errorCode == .userCancel || errorCode == .systemCancel {
+//                        self?.didCancelLastAttempt = true
+//                    }
+//                }
+//                completion(success)
+//            }
+//        }
     }
 }

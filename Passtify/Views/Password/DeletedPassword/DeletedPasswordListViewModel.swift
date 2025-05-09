@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+
 protocol DeletedPasswordListViewModelDelegate: AnyObject {
     func didSelectDeletedItem(item: PasswordItemModel)
 }
@@ -15,28 +16,38 @@ class DeletedPasswordListViewModel: ViewModel {
     private weak var delegate: DeletedPasswordListViewModelDelegate?
     private let passwordService: PasswordServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-    
+
     @Published var deletedPasswordList: [PasswordItemModel] = []
-    
+    @Published var searchTerm: String = ""
+    @Published var filteredList: [PasswordItemModel] = []
+
     init(passwordService: PasswordServiceProtocol) {
         self.passwordService = passwordService
+        bind()
     }
-    
+
     func setup(delegate: DeletedPasswordListViewModelDelegate) -> Self {
         self.delegate = delegate
-        bind()
         loadDeletedPasswords()
         return self
     }
-    
+
     private func bind() {
-        // Optional Combine bindings here
+        Publishers.CombineLatest($searchTerm, $deletedPasswordList)
+            .map { term, list in
+                if term.isEmpty {
+                    return list
+                } else {
+                    return list.filter {
+                        $0.label.localizedCaseInsensitiveContains(term) ||
+                        $0.userName.localizedCaseInsensitiveContains(term)
+                    }
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$filteredList)
     }
-    
-    func onActionSelectItem(item: PasswordItemModel) {
-        delegate?.didSelectDeletedItem(item: item)
-    }
-    
+
     func loadDeletedPasswords() {
         passwordService.loadDeletedPasswords()
             .sink { completion in
@@ -48,5 +59,10 @@ class DeletedPasswordListViewModel: ViewModel {
             }
             .store(in: &cancellables)
     }
+
+    func onActionSelectItem(item: PasswordItemModel) {
+        delegate?.didSelectDeletedItem(item: item)
+    }
 }
+
 
