@@ -7,7 +7,6 @@
 
 import Foundation
 import Swinject
-import FirebaseAuth
 import SwiftUI
 struct ExportFile: Identifiable {
     let id = UUID()
