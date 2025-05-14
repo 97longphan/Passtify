@@ -13,7 +13,7 @@ struct DetailPasswordView: View {
     @State private var tempItem: PasswordItemModel = .empty
     @State private var showActionSheetDelete = false
     @EnvironmentObject var toastManager: ToastManager
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -24,29 +24,29 @@ struct DetailPasswordView: View {
                     HeaderCard()
                     InfoCard()
                 }
-
+                
                 if editing {
                     DeleteButtonSection()
                 }
-
+                
                 Spacer(minLength: 32)
             }
             .padding()
         }
         .background(Color(UIColor.systemGroupedBackground))
-        .navigationTitle("Chi tiết mật khẩu")
+        .navigationTitle("key.password_details".localized)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(editing)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 if editing {
-                    Button("Huỷ") {
+                    Button("key.cancel".localized) {
                         editing = false
                     }
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(editing ? "Xong" : "Sửa") {
+                Button(editing ? "key.cancel".localized : "key.edit".localized) {
                     if editing {
                         viewModel.updateItem(newItem: tempItem)
                     } else {
@@ -57,7 +57,7 @@ struct DetailPasswordView: View {
             }
         }
     }
-
+    
     private func HeaderCard() -> some View {
         HStack(spacing: 16) {
             Circle()
@@ -65,11 +65,11 @@ struct DetailPasswordView: View {
                 .frame(width: 48, height: 48)
                 .overlay(Text(viewModel.passwordItem.label.prefix(1).uppercased())
                     .font(.title2).bold())
-
+            
             VStack(alignment: .leading) {
                 Text(viewModel.passwordItem.label)
                     .font(.title3).bold()
-                Text("Sửa đổi: \(formattedDate(viewModel.passwordItem.creationDate))")
+                Text(String(format: "key.modified_value".localized, formattedDate(viewModel.passwordItem.creationDate)))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -82,14 +82,14 @@ struct DetailPasswordView: View {
         )
         .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
     }
-
+    
     private func InfoCard() -> some View {
         VStack(spacing: 12) {
-            InfoRow(title: "Tên người dùng", value: viewModel.passwordItem.userName) {
-                copyToClipboard(viewModel.passwordItem.userName, label: "tên người dùng")
+            InfoRow(title: "key.username".localized, value: viewModel.passwordItem.userName) {
+                copyToClipboard(viewModel.passwordItem.userName, label: "key.username".localized)
             }
-            InfoRow(title: "Mật khẩu", value: "••••••••") {
-                copyToClipboard(viewModel.passwordItem.password, label: "mật khẩu")
+            InfoRow(title: "key.password".localized, value: "••••••••") {
+                copyToClipboard(viewModel.passwordItem.password, label: "key.password".localized)
             }
         }
         .padding()
@@ -99,7 +99,7 @@ struct DetailPasswordView: View {
         )
         .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
     }
-
+    
     private func EditableHeaderCard() -> some View {
         HStack(spacing: 16) {
             Circle()
@@ -107,11 +107,11 @@ struct DetailPasswordView: View {
                 .frame(width: 48, height: 48)
                 .overlay(Text(tempItem.label.prefix(1).uppercased())
                     .font(.title2).bold())
-
+            
             VStack(alignment: .leading) {
-                TextField("Tên", text: $tempItem.label)
+                TextField("key.username", text: $tempItem.label)
                     .font(.title3).bold()
-                Text("Sửa đổi: \(formattedDate(viewModel.passwordItem.creationDate))")
+                Text(String(format: "key.modified_value".localized, formattedDate(viewModel.passwordItem.creationDate)))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -124,11 +124,11 @@ struct DetailPasswordView: View {
         )
         .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
     }
-
+    
     private func EditableInfoCard() -> some View {
         VStack(spacing: 12) {
-            EditableRow(title: "Tên người dùng", text: $tempItem.userName)
-            EditableRow(title: "Mật khẩu", text: $tempItem.password)
+            EditableRow(title: "key.username".localized, text: $tempItem.userName)
+            EditableRow(title: "key.password".localized, text: $tempItem.password)
         }
         .padding()
         .background(
@@ -137,27 +137,12 @@ struct DetailPasswordView: View {
         )
         .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
     }
-
-//    private func SecurityWarningCard() -> some View {
-//        HStack(spacing: 10) {
-//            Image(systemName: "exclamationmark.triangle.fill")
-//                .foregroundColor(.yellow)
-//            Text("Mật khẩu yếu")
-//                .font(.callout)
-//            Spacer()
-//        }
-//        .padding()
-//        .background(
-//            RoundedRectangle(cornerRadius: 12)
-//                .fill(Color.yellow.opacity(0.15))
-//        )
-//    }
-
+    
     private func DeleteButtonSection() -> some View {
         Button(role: .destructive) {
             showActionSheetDelete = true
         } label: {
-            Text("Xoá mật khẩu")
+            Text("key.delete_password".localized)
                 .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding()
@@ -166,15 +151,15 @@ struct DetailPasswordView: View {
                 .fill(Color(UIColor.secondarySystemGroupedBackground))
         )
         .confirmationDialog("", isPresented: $showActionSheetDelete, titleVisibility: .hidden) {
-            Button("Xoá mật khẩu", role: .destructive) {
+            Button("key.delete_password".localized, role: .destructive) {
                 viewModel.deleteItem()
             }
-            Button("Huỷ", role: .cancel) {}
+            Button("key.cancel".localized, role: .cancel) {}
         } message: {
-            Text("Mật khẩu này sẽ được di chuyển vào Đã xoá gần đây.\nSau 30 ngày, mật khẩu sẽ bị xoá vĩnh viễn.")
+            Text("key.password_delete_warning".localized)
         }
     }
-
+    
     private func InfoRow(title: String, value: String, onTap: @escaping () -> Void) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -191,7 +176,7 @@ struct DetailPasswordView: View {
             }
         }
     }
-
+    
     private func EditableRow(title: String, text: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
@@ -202,17 +187,18 @@ struct DetailPasswordView: View {
                 .foregroundColor(.primary)
         }
     }
-
+    
     private func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
-
+    
     private func copyToClipboard(_ value: String, label: String) {
         UIPasteboard.general.string = value
-        toastManager.show("Đã sao chép \(label)")
+        toastManager.show(String(format: "key.copied_value".localized, label))
     }
-
+    
 }
+

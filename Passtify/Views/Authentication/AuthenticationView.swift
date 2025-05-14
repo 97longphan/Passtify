@@ -11,6 +11,7 @@ struct AuthenticationView: View {
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject var session: AppSession
     @ObservedObject var viewModel: AuthenticationViewModel
+    @ObservedObject var lang = LocalizationManager.shared
     
     var body: some View {
         ZStack {
@@ -21,14 +22,12 @@ struct AuthenticationView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40, height: 40)
                         .foregroundColor(.yellow)
-                    
-                    
-                    Text("Mật khẩu đã bị khóa")
+                    Text("key.password_has_been_locked".localized)
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)
                     
-                    Button("Mở khóa") {
+                    Button("key.unlock".localized) {
                         viewModel.authenticate { success in
                             if success {
                                 session.isAuthenticated = true
@@ -47,7 +46,13 @@ struct AuthenticationView: View {
                 .shadow(color: Color.primary.opacity(0.15), radius: 12, x: 0, y: 4)
             }
             .padding()
-        }
+        }.navigationBarItems(trailing:
+                                Button(action: {
+            lang.currentLanguage = lang.currentLanguage.toggled
+        }) {
+            Text(lang.currentLanguage.toggled.flag)
+            .font(.system(size: 24))}
+        )
         .onChange(of: scenePhase) { newValue in
             if newValue == .active && !viewModel.didCancelLastAttempt {
                 viewModel.authenticate { success in

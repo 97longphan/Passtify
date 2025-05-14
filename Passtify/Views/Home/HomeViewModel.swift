@@ -26,17 +26,17 @@ class HomeViewModel: ObservableObject {
         self.passwordService = passwordService
         self.fileService = fileService
     }
-
+    
     @Published var categories: [HomeItemCategoryModel] = HomeItemCategoryType.allCases.map {
         HomeItemCategoryModel(type: $0, count: 0)
     }
-
+    
     func setup(delegate: HomeViewModelDelegate) -> Self {
         self.delegate = delegate
         loadCount()
         return self
     }
-
+    
     func handleCategoryTap(item: HomeItemCategoryModel) {
         switch item.type {
         case .password:
@@ -56,7 +56,7 @@ class HomeViewModel: ObservableObject {
             delegate?.didImportData()
         }
     }
-
+    
     func importDataFrom(url: URL) {
         fileService.importEncryptedDataFromZip(url)
             .sink { completion in
@@ -67,13 +67,13 @@ class HomeViewModel: ObservableObject {
                 self?.loadCount()
             }.store(in: &cancellables)
     }
-
+    
     private func updateCount(for type: HomeItemCategoryType, count: Int) {
         if let index = categories.firstIndex(where: { $0.type == type }) {
             categories[index].count = count
         }
     }
-
+    
     func loadCount() {
         passwordService.loadPasswords()
             .sink { completion in
@@ -84,7 +84,7 @@ class HomeViewModel: ObservableObject {
                 self?.updateCount(for: .password, count: passwords.count)
             }
             .store(in: &cancellables)
-
+        
         passwordService.loadDeletedPasswords()
             .sink { completion in
                 if case let .failure(error) = completion {

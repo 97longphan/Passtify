@@ -16,11 +16,11 @@ struct PasswordListEmptyView: View {
                 .font(.system(size: 50))
                 .foregroundColor(.secondary)
 
-            Text("Không có mật khẩu đã lưu")
+            Text("key.no_saved_passwords".localized)
                 .font(.headline)
                 .foregroundColor(.primary)
 
-            Text("Mật khẩu được lưu tự động khi đăng nhập vào các trang web và ứng dụng.")
+            Text("key.passwords_auto_fill_guide".localized)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)

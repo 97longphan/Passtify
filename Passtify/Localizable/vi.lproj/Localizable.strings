@@ -1,0 +1,62 @@
+//
+//  Localizable.strings
+//  Passtify
+//
+//  Created by Phan Hoang Long on 14/5/25.
+//
+
+"key.export_no_file" = "Bạn hãy chắc chắn rằng có ít nhất một mật khẩu được lưu ^^";
+"key.export_failed_zip" = "Không thể tạo file nén. Vui lòng thử lại sau.";
+"key.export_unknown_error" = "Đã xảy ra lỗi: %@";
+"key.title_deleted" = "Đã xoá";
+"key.title_import" = "Nhập dữ liệu";
+"key.title_export" = "Xuất dữ liệu";
+"key.subtitle_password" = "Tất cả các mật khẩu bạn đã lưu";
+"key.subtitle_deleted" = "Mật khẩu đã xoá gần đây";
+"key.subtitle_import" = "Khôi phục dữ liệu từ file backup";
+"key.subtitle_export" = "Sao lưu dữ liệu ra file ZIP";
+"key.deleted_passwords_guide" = "Các mật khẩu và mã khoá đã xoá sẽ có sẵn tại đây trong 30 ngày, trước khi bị xoá tự động.";
+"key.password_details" = "Chi tiết mật khẩu";
+"key.recently_deleted" = "Đã xoá gần đây";
+"key.data" = "Dữ liệu";
+"key.note" = "GHI CHÚ";
+"key.cancel" = "Huỷ";
+"key.restore" = "Khôi phục";
+"key.no_saved_passwords" = "Không có mật khẩu đã lưu";
+"key.no_deleted_passwords" = "Không có mật khẩu đã xoá";
+"key.save" = "Lưu";
+"key.password" = "Mật khẩu";
+"key.password_has_been_locked" = "Mật khẩu đã bị khóa";
+"key.passwords_auto_fill_guide" = "Mật khẩu được lưu tự động khi đăng nhập vào các trang web và ứng dụng.";
+"key.new_password" = "Mật khẩu mới";
+"key.unlock" = "Mở khóa";
+"key.user" = "người dùng";
+"key.passtify" = "Passtify";
+"key.passtify_value" = "Passtify %@";
+"key.edit" = "Sửa";
+"key.modified_value" = "Sửa đổi: %@";
+"key.name" = "Tên";
+"key.username" = "Tên người dùng";
+"key.add_note" = "Thêm ghi chú";
+"key.login_info" = "Thông tin đăng nhập";
+"key.search" = "Tìm kiếm";
+"key.website_or_label" = "Trang web hoặc nhãn";
+"key.delete" = "Xóa";
+"key.delete_password" = "Xoá mật khẩu";
+"key.done" = "Xong";
+"key.password_delete_warning" = "Mật khẩu này sẽ được di chuyển vào Đã xoá gần đây.\nSau 30 ngày, mật khẩu sẽ bị xoá vĩnh viễn.";
+"key.copied_value" = "Đã sao chép %@";
+
+"key.tip_0" = "Đừng dùng chung một mật khẩu cho nhiều tài khoản.";
+"key.tip_1" = "Hãy bật xác thực hai yếu tố (2FA) khi có thể.";
+"key.tip_2" = "Mật khẩu mạnh nên có ký tự đặc biệt, chữ hoa và số.";
+"key.tip_3" = "Không lưu mật khẩu vào ghi chú không mã hoá.";
+"key.tip_4" = "Sử dụng trình quản lý mật khẩu để lưu trữ an toàn.";
+"key.tip_5" = "Mỗi tài khoản nên có một mật khẩu riêng biệt.";
+"key.tip_6" = "Tránh dùng thông tin cá nhân trong mật khẩu.";
+"key.tip_7" = "Không chia sẻ mật khẩu qua tin nhắn hay email.";
+"key.tip_8" = "Thường xuyên cập nhật mật khẩu định kỳ.";
+"key.tip_9" = "Tránh dùng Wi-Fi công cộng khi đăng nhập tài khoản.";
+
+"key.security_tip_title" = "Mẹo bảo mật";
+"key.default_tip_text" = "Click vô đây tôi cho bạn tip nè ^^";

@@ -1,0 +1,62 @@
+//
+//  Localizable.strings
+//  Passtify
+//
+//  Created by Phan Hoang Long on 14/5/25.
+//
+
+"key.export_no_file" = "Make sure at least one password is saved ^^";
+"key.export_failed_zip" = "Unable to create ZIP file. Please try again later.";
+"key.export_unknown_error" = "An error occurred: %@";
+"key.title_deleted" = "Deleted";
+"key.title_import" = "Import Data";
+"key.title_export" = "Export Data";
+"key.subtitle_password" = "All the passwords you have saved";
+"key.subtitle_deleted" = "Recently deleted passwords";
+"key.subtitle_import" = "Restore data from backup file";
+"key.subtitle_export" = "Export data to ZIP file";
+"key.deleted_passwords_guide" = "Deleted passwords and codes will be available here for 30 days before being automatically removed.";
+"key.password_details" = "Password details";
+"key.recently_deleted" = "Recently Deleted";
+"key.data" = "Data";
+"key.note" = "NOTE";
+"key.cancel" = "Cancel";
+"key.restore" = "Restore";
+"key.no_saved_passwords" = "No saved passwords";
+"key.no_deleted_passwords" = "No deleted passwords";
+"key.save" = "Save";
+"key.password" = "Password";
+"key.password_has_been_locked" = "Password has been locked";
+"key.passwords_auto_fill_guide" = "Passwords are automatically saved when logging in to websites and apps.";
+"key.new_password" = "New Password";
+"key.unlock" = "Unlock";
+"key.user" = "user";
+"key.passtify" = "Passtify";
+"key.passtify_value" = "Passtify %@";
+"key.edit" = "Edit";
+"key.modified_value" = "Modified: %@";
+"key.name" = "Name";
+"key.username" = "Username";
+"key.add_note" = "Add note";
+"key.login_info" = "Login Info";
+"key.search" = "Search";
+"key.website_or_label" = "Website or Label";
+"key.delete" = "Delete";
+"key.delete_password" = "Delete Password";
+"key.done" = "Done";
+"key.password_delete_warning" = "This password will be moved to Recently Deleted.\nAfter 30 days, it will be permanently deleted.";
+"key.copied_value" = "Copied %@";
+
+"key.tip_0" = "Don’t reuse the same password across multiple accounts.";
+"key.tip_1" = "Enable two-factor authentication (2FA) whenever possible.";
+"key.tip_2" = "Strong passwords should include special characters, uppercase letters, and numbers.";
+"key.tip_3" = "Avoid storing passwords in unencrypted notes.";
+"key.tip_4" = "Use a password manager to store passwords securely.";
+"key.tip_5" = "Each account should have a unique password.";
+"key.tip_6" = "Avoid using personal information in your passwords.";
+"key.tip_7" = "Never share passwords via messages or email.";
+"key.tip_8" = "Update your passwords regularly.";
+"key.tip_9" = "Avoid logging into accounts over public Wi-Fi.";
+
+"key.security_tip_title" = "Security Tip";
+"key.default_tip_text" = "Click here for a tip ^^";

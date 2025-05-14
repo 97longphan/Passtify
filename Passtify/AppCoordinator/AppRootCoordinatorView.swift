@@ -29,7 +29,9 @@ struct AppRootCoordinatorView: View {
             
             
         } else {
-            AuthenticationView(viewModel: coordinator.authenViewModel)
+            NavigationStack {
+                AuthenticationView(viewModel: coordinator.authenViewModel)
+            }
         }
     }
     

@@ -4,29 +4,15 @@ import Combine
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @EnvironmentObject var toastManager: ToastManager
-    @State private var currentTip: String = "Click vô đây tôi cho bạn tip nè ^^"
+    @State private var currentTipKey: String = "key.default_tip_text"
+    @ObservedObject var lang = LocalizationManager.shared
     
-    private let securityTips = [
-        "Đừng dùng chung một mật khẩu cho nhiều tài khoản.",
-        "Hãy bật xác thực hai yếu tố (2FA) khi có thể.",
-        "Mật khẩu mạnh nên có ký tự đặc biệt, chữ hoa và số.",
-        "Không lưu mật khẩu vào ghi chú không mã hoá.",
-        "Sử dụng trình quản lý mật khẩu để lưu trữ an toàn.",
-        "Mỗi tài khoản nên có một mật khẩu riêng biệt.",
-        "Tránh dùng thông tin cá nhân trong mật khẩu.",
-        "Không chia sẻ mật khẩu qua tin nhắn hay email.",
-        "Thường xuyên cập nhật mật khẩu định kỳ.",
-        "Tránh dùng Wi-Fi công cộng khi đăng nhập tài khoản."
-    ]
-
-    private var randomTip: String {
-        securityTips.randomElement() ?? ""
-    }
-
+    private let tipKeys = (0..<10).map { "key.tip_\($0)" }
+    
     var body: some View {
         List {
             // PASSWORD SECTION
-            Section(header: Text("Mật khẩu")) {
+            Section(header: Text("key.password".localized)) {
                 ForEach(viewModel.categories.filter { $0.type.group == .password }) { item in
                     Button {
                         viewModel.handleCategoryTap(item: item)
@@ -35,9 +21,9 @@ struct HomeView: View {
                     }
                 }
             }
-
+            
             // DATA SECTION
-            Section(header: Text("Dữ liệu")) {
+            Section(header: Text("key.data".localized)) {
                 ForEach(viewModel.categories.filter { $0.type.group == .data }) { item in
                     Button {
                         viewModel.handleCategoryTap(item: item)
@@ -52,8 +38,8 @@ struct HomeView: View {
                     updateTip()
                 } label: {
                     BannerListItemView(
-                        title: "Mẹo bảo mật",
-                        subtitle: currentTip,
+                        title: ("key.security_tip_title".localized),
+                        subtitle: currentTipKey.localized,
                         iconName: "lightbulb.fill"
                     )
                 }
@@ -66,6 +52,13 @@ struct HomeView: View {
         }
         .listStyle(.insetGrouped)
         .navigationTitle("Passtify")
+        .navigationBarItems(trailing:
+                                Button(action: {
+            lang.currentLanguage = lang.currentLanguage.toggled
+        }) {
+            Text(lang.currentLanguage.toggled.flag)
+            .font(.system(size: 24))}
+        )
         .onAppear {
             viewModel.loadCount()
         }
@@ -76,10 +69,10 @@ struct HomeView: View {
     
     private func updateTip() {
         withAnimation(.easeInOut(duration: 0.25)) {
-            currentTip = securityTips.filter { $0 != currentTip }.randomElement() ?? ""
+            currentTipKey = tipKeys.filter { $0 != currentTipKey }.randomElement() ??   tipKeys.first!
         }
     }
-
+    
 }
 
 struct ListFooterView: View {
@@ -99,19 +92,19 @@ struct BannerListItemView: View {
     let title: String
     let subtitle: String
     let iconName: String
-
+    
     var body: some View {
         HStack(spacing: 12) {
             ZStack {
                 Circle()
                     .fill(Color.yellow)
                     .frame(width: 36, height: 36)
-
+                
                 Image(systemName: iconName)
                     .foregroundColor(.white)
                     .font(.system(size: 16, weight: .bold))
             }
-
+            
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.body)
@@ -120,7 +113,7 @@ struct BannerListItemView: View {
                     .foregroundColor(.secondary)
                     .transition(.opacity) // Thêm hiệu ứng fade
             }
-
+            
             Spacer()
         }
         .padding(.vertical, 8)

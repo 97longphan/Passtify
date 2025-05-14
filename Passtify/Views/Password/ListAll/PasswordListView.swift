@@ -36,8 +36,8 @@ struct PasswordListView: View {
             }
             .listStyle(.plain)
             .background(Color(UIColor.systemGroupedBackground))
-            .searchable(text: $viewModel.searchTerm, prompt: "Tìm kiếm")
-            .navigationTitle("Mật khẩu")
+            .searchable(text: $viewModel.searchTerm, prompt: "key.search".localized)
+            .navigationTitle("key.password".localized)
             .onAppear {
                 viewModel.loadPasswords()
             }

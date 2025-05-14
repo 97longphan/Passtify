@@ -16,11 +16,11 @@ struct DeletedPasswordListEmptyView: View {
                 .font(.system(size: 50))
                 .foregroundColor(.secondary)
 
-            Text("Không có mật khẩu đã xoá")
+            Text("key.no_deleted_passwords".localized)
                 .font(.headline)
                 .foregroundColor(.primary)
 
-            Text("Các mật khẩu và mã khoá đã xoá sẽ có sẵn tại đây trong 30 ngày, trước khi bị xoá tự động.")
+            Text("key.deleted_passwords_guide".localized)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)

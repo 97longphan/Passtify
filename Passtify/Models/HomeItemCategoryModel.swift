@@ -28,19 +28,19 @@ enum HomeItemCategoryType: CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .password: return "Mật khẩu"
-        case .deleted: return "Đã xoá"
-        case .importData: return "Nhập dữ liệu"
-        case .exportData: return "Xuất dữ liệu"
+        case .password: return "key.password".localized
+        case .deleted: return "key.title_deleted".localized
+        case .importData: return "key.title_import".localized
+        case .exportData: return "key.title_export".localized
         }
     }
 
     var subtitle: String {
         switch self {
-        case .password: return "Tất cả các mật khẩu bạn đã lưu"
-        case .deleted: return "Mật khẩu đã xoá gần đây"
-        case .importData: return "Khôi phục dữ liệu từ file backup"
-        case .exportData: return "Sao lưu dữ liệu ra file ZIP"
+        case .password: return "key.subtitle_password".localized
+        case .deleted: return "key.subtitle_deleted".localized
+        case .importData: return "key.subtitle_import".localized
+        case .exportData: return "key.subtitle_export".localized
         }
     }
 

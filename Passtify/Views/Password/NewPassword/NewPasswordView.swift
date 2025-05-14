@@ -20,29 +20,29 @@ struct NewPasswordView: View {
                             .foregroundColor(.yellow)
                             .padding(.leading, 4)
                         
-                        TextField("Trang web hoặc nhãn", text: $viewModel.input.label)
+                        TextField("key.website_or_label".localized, text: $viewModel.input.label)
                             .font(.headline)
                     }
                     .padding(.vertical, 4)
                     
                     HStack {
-                        Text("Tên người dùng")
+                        Text("key.username".localized)
                         Spacer()
-                        TextField("người dùng", text: $viewModel.input.userName)
+                        TextField("key.user".localized, text: $viewModel.input.userName)
                             .multilineTextAlignment(.trailing)
                             .foregroundColor(.gray)
                     }
                     
                     HStack {
-                        Text("Mật khẩu")
+                        Text("key.password".localized)
                         Spacer()
-                        SecureField("mật khẩu", text: $viewModel.input.password)
+                        SecureField("key.password".localized, text: $viewModel.input.password)
                             .multilineTextAlignment(.trailing)
                             .foregroundColor(.gray)
                     }
                 }
                 
-                Section(header: Text("GHI CHÚ").font(.caption).foregroundColor(.gray)) {
+                Section(header: Text("key.note".localized).font(.caption).foregroundColor(.gray)) {
                     ZStack(alignment: .topLeading) {
                         TextEditor(text: Binding(
                             get: { viewModel.input.notes ?? "" },
@@ -52,7 +52,7 @@ struct NewPasswordView: View {
                         .foregroundColor((viewModel.input.notes ?? "").isEmpty ? .gray : .primary)
                         
                         if (viewModel.input.notes ?? "").isEmpty {
-                            Text("Thêm Ghi chú")
+                            Text("key.add_note".localized)
                                 .foregroundColor(.gray)
                                 .padding(.top, 8)
                                 .padding(.horizontal, 5)
@@ -60,12 +60,12 @@ struct NewPasswordView: View {
                     }
                 }
             }
-            .navigationBarTitle("Mật khẩu mới", displayMode: .inline)
+            .navigationBarTitle("key.new_password".localized, displayMode: .inline)
             .navigationBarItems(
-                leading: Button("Hủy") {
+                leading: Button("key.cancel".localized) {
                     viewModel.onDissmissNewPassword()
                 },
-                trailing: Button("Lưu") {
+                trailing: Button("key.save".localized) {
                     viewModel.onSaveNewPassword()
                 }
                     .bold()

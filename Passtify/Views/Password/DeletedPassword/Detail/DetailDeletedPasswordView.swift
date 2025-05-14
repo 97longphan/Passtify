@@ -28,23 +28,23 @@ struct DetailDeletedPasswordView: View {
                         Text(viewModel.passwordItem.label)
                             .font(.headline)
                             .bold()
-                        Text("Sửa đổi: \(formattedDate(viewModel.passwordItem.creationDate))")
+                        Text(String(format: "key.modified_value".localized, formattedDate(viewModel.passwordItem.creationDate)))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
                 }
             }
             
-            Section(header: Text("Thông tin đăng nhập")) {
+            Section(header: Text("key.login_info".localized)) {
                 HStack {
-                    Text("Tên người dùng")
+                    Text("key.username".localized)
                     Spacer()
                     Text(viewModel.passwordItem.userName)
                         .foregroundColor(.secondary)
                 }
                 
                 HStack {
-                    Text("Mật khẩu")
+                    Text("key.password".localized)
                     Spacer()
                     Text("••••••••")
                         .foregroundColor(.secondary)
@@ -52,12 +52,12 @@ struct DetailDeletedPasswordView: View {
             }
             
             Section {
-                Button("Khôi phục") {
+                Button("key.restore".localized) {
                     viewModel.recoverPassword()
                 }
                 .foregroundColor(.blue)
                 
-                Button("Xóa") {
+                Button("key.delete".localized) {
                     viewModel.permanentlyDeletePassword()
                 }
                 .foregroundColor(.red)

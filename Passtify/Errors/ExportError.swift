@@ -14,11 +14,12 @@ enum ExportError: Error {
     var msg: String {
         switch self {
         case .noFile:
-            "Bạn hãy chắc chắn rằng có ít nhất một mật khẩu được lưu ^^"
+            return "key.export_no_file".localized
         case .failedToCreateArchive:
-            "Không thể tạo file nén. Vui lòng thử lại sau."
+            return "key.export_failed_zip".localized
         case .unknown(let err):
-            "Đã xảy ra lỗi: \(err.localizedDescription)"
+            return String(format: "key.export_unknown_error".localized, err.localizedDescription)
         }
     }
 }
+

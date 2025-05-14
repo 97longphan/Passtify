@@ -16,22 +16,22 @@ class DeletedPasswordListViewModel: ViewModel {
     private weak var delegate: DeletedPasswordListViewModelDelegate?
     private let passwordService: PasswordServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-
+    
     @Published var deletedPasswordList: [PasswordItemModel] = []
     @Published var searchTerm: String = ""
     @Published var filteredList: [PasswordItemModel] = []
-
+    
     init(passwordService: PasswordServiceProtocol) {
         self.passwordService = passwordService
         bind()
     }
-
+    
     func setup(delegate: DeletedPasswordListViewModelDelegate) -> Self {
         self.delegate = delegate
         loadDeletedPasswords()
         return self
     }
-
+    
     private func bind() {
         Publishers.CombineLatest($searchTerm, $deletedPasswordList)
             .map { term, list in
@@ -47,7 +47,7 @@ class DeletedPasswordListViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .assign(to: &$filteredList)
     }
-
+    
     func loadDeletedPasswords() {
         passwordService.loadDeletedPasswords()
             .sink { completion in
@@ -59,7 +59,7 @@ class DeletedPasswordListViewModel: ViewModel {
             }
             .store(in: &cancellables)
     }
-
+    
     func onActionSelectItem(item: PasswordItemModel) {
         delegate?.didSelectDeletedItem(item: item)
     }

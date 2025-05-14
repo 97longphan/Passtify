@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DeletedPasswordListView: View {
     @ObservedObject var viewModel: DeletedPasswordListViewModel
-
+    
     var body: some View {
         List {
             if viewModel.filteredList.isEmpty {
@@ -30,8 +30,8 @@ struct DeletedPasswordListView: View {
         }
         .listStyle(.plain)
         .background(Color(UIColor.systemGroupedBackground))
-        .navigationTitle("Đã xoá gần đây")
-        .searchable(text: $viewModel.searchTerm, prompt: "Tìm kiếm")
+        .navigationTitle("key.recently_deleted".localized)
+        .searchable(text: $viewModel.searchTerm, prompt: "key.search".localized)
     }
 }
 

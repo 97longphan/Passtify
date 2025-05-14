@@ -8,7 +8,7 @@ import SwiftUI
 
 struct HomeListItemView: View {
     let item: HomeItemCategoryModel
-
+    
     var body: some View {
         HStack(spacing: 12) {
             ZStack {
@@ -19,7 +19,7 @@ struct HomeListItemView: View {
                     .foregroundColor(.white)
                     .font(.system(size: 20, weight: .semibold))
             }
-
+            
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.type.title)
                     .font(.body)
@@ -27,9 +27,9 @@ struct HomeListItemView: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
-
+            
             Spacer()
-
+            
             if item.type.isShowCount {
                 Text("\(item.count)")
                     .foregroundColor(.secondary)
