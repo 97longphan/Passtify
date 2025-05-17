@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,6 +45,8 @@
 		6BAA74552DD3B2170007B773 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74542DD3B2160007B773 /* LocalizationManager.swift */; };
 		6BAA74622DD3B8A20007B773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BAA74612DD3B8A20007B773 /* Localizable.strings */; };
 		6BAA74692DD4FF660007B773 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74682DD4FF550007B773 /* String+Extensions.swift */; };
+		6BAA748F2DD89ACB0007B773 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BAA748E2DD89ACB0007B773 /* AuthenticationServices.framework */; };
+		6BAA749A2DD89ACB0007B773 /* PasstifyAutoFill.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6BAA748D2DD89ACB0007B773 /* PasstifyAutoFill.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6BCF43352DC137B500269B4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF43342DC137AA00269B4B /* AppDelegate.swift */; };
 		6BCF43372DC1416D00269B4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF43362DC1416D00269B4B /* GoogleService-Info.plist */; };
 		6BD94B2A2DC86CD2005BF242 /* CryptoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD94B292DC86CCE005BF242 /* CryptoManager.swift */; };
@@ -77,7 +79,28 @@
 			remoteGlobalIDString = 6B4D8BB92DC0C93B00103278;
 			remoteInfo = Passtify;
 		};
+		6BAA74982DD89ACB0007B773 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B4D8BB22DC0C93B00103278 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BAA748C2DD89ACB0007B773;
+			remoteInfo = PasstifyAutoFill;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6BAA749B2DD89ACB0007B773 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6BAA749A2DD89ACB0007B773 /* PasstifyAutoFill.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6B3324C32DCE8F4A009D2DAD /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -122,6 +145,9 @@
 		6BAA74602DD3B8A20007B773 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BAA74632DD3B8A40007B773 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BAA74682DD4FF550007B773 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		6BAA748D2DD89ACB0007B773 /* PasstifyAutoFill.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PasstifyAutoFill.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BAA748E2DD89ACB0007B773 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		6BAA74A02DD89B270007B773 /* Passtify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Passtify.entitlements; sourceTree = "<group>"; };
 		6BCF43342DC137AA00269B4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BCF43362DC1416D00269B4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BD94B292DC86CCE005BF242 /* CryptoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoManager.swift; sourceTree = "<group>"; };
@@ -137,6 +163,20 @@
 		6BF473A02DCE560D00CA10B3 /* ToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastManager.swift; sourceTree = "<group>"; };
 		6BF473A22DCE5A6700CA10B3 /* ExportError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6BAA749E2DD89ACB0007B773 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6BAA748C2DD89ACB0007B773 /* PasstifyAutoFill */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6BAA74902DD89ACB0007B773 /* PasstifyAutoFill */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6BAA749E2DD89ACB0007B773 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PasstifyAutoFill; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		6B4D8BB72DC0C93B00103278 /* Frameworks */ = {
@@ -162,6 +202,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6BAA748A2DD89ACB0007B773 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BAA748F2DD89ACB0007B773 /* AuthenticationServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -171,6 +219,7 @@
 				6B4D8BBC2DC0C93B00103278 /* Passtify */,
 				6B4D8BCD2DC0C93E00103278 /* PasstifyTests */,
 				6B4D8BD72DC0C93E00103278 /* PasstifyUITests */,
+				6BAA74902DD89ACB0007B773 /* PasstifyAutoFill */,
 				6BC1A3522DC135A200D01D3B /* Frameworks */,
 				6B4D8BBB2DC0C93B00103278 /* Products */,
 			);
@@ -182,6 +231,7 @@
 				6B4D8BBA2DC0C93B00103278 /* Passtify.app */,
 				6B4D8BCA2DC0C93E00103278 /* PasstifyTests.xctest */,
 				6B4D8BD42DC0C93E00103278 /* PasstifyUITests.xctest */,
+				6BAA748D2DD89ACB0007B773 /* PasstifyAutoFill.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,6 +239,7 @@
 		6B4D8BBC2DC0C93B00103278 /* Passtify */ = {
 			isa = PBXGroup;
 			children = (
+				6BAA74A02DD89B270007B773 /* Passtify.entitlements */,
 				6BAA74512DD3B1D90007B773 /* Localizable */,
 				6BF4739C2DCE527B00CA10B3 /* Helper */,
 				6B7239852DCB4ABC00F46D1E /* Info.plist */,
@@ -396,6 +447,7 @@
 		6BC1A3522DC135A200D01D3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6BAA748E2DD89ACB0007B773 /* AuthenticationServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -436,10 +488,12 @@
 				6B4D8BB62DC0C93B00103278 /* Sources */,
 				6B4D8BB72DC0C93B00103278 /* Frameworks */,
 				6B4D8BB82DC0C93B00103278 /* Resources */,
+				6BAA749B2DD89ACB0007B773 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6BAA74992DD89ACB0007B773 /* PBXTargetDependency */,
 			);
 			name = Passtify;
 			packageProductDependencies = (
@@ -486,6 +540,28 @@
 			productReference = 6B4D8BD42DC0C93E00103278 /* PasstifyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		6BAA748C2DD89ACB0007B773 /* PasstifyAutoFill */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BAA749F2DD89ACB0007B773 /* Build configuration list for PBXNativeTarget "PasstifyAutoFill" */;
+			buildPhases = (
+				6BAA74892DD89ACB0007B773 /* Sources */,
+				6BAA748A2DD89ACB0007B773 /* Frameworks */,
+				6BAA748B2DD89ACB0007B773 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6BAA74902DD89ACB0007B773 /* PasstifyAutoFill */,
+			);
+			name = PasstifyAutoFill;
+			packageProductDependencies = (
+			);
+			productName = PasstifyAutoFill;
+			productReference = 6BAA748D2DD89ACB0007B773 /* PasstifyAutoFill.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -493,7 +569,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1510;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					6B4D8BB92DC0C93B00103278 = {
@@ -506,6 +582,9 @@
 					6B4D8BD32DC0C93E00103278 = {
 						CreatedOnToolsVersion = 15.1;
 						TestTargetID = 6B4D8BB92DC0C93B00103278;
+					};
+					6BAA748C2DD89ACB0007B773 = {
+						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
@@ -530,6 +609,7 @@
 				6B4D8BB92DC0C93B00103278 /* Passtify */,
 				6B4D8BC92DC0C93E00103278 /* PasstifyTests */,
 				6B4D8BD32DC0C93E00103278 /* PasstifyUITests */,
+				6BAA748C2DD89ACB0007B773 /* PasstifyAutoFill */,
 			);
 		};
 /* End PBXProject section */
@@ -554,6 +634,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6B4D8BD22DC0C93E00103278 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BAA748B2DD89ACB0007B773 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -631,6 +718,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6BAA74892DD89ACB0007B773 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -643,6 +737,11 @@
 			isa = PBXTargetDependency;
 			target = 6B4D8BB92DC0C93B00103278 /* Passtify */;
 			targetProxy = 6B4D8BD52DC0C93E00103278 /* PBXContainerItemProxy */;
+		};
+		6BAA74992DD89ACB0007B773 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BAA748C2DD89ACB0007B773 /* PasstifyAutoFill */;
+			targetProxy = 6BAA74982DD89ACB0007B773 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -785,6 +884,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Passtify/Passtify.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -810,7 +910,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.longphan.passtify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "passtify provisioning";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "provisioning + autofill + appgroup";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -826,6 +926,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Passtify/Passtify.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -851,7 +952,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dev.longphan.passtify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "passtify provisioning";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "provisioning + autofill + appgroup";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -938,6 +1039,68 @@
 			};
 			name = Release;
 		};
+		6BAA749C2DD89ACB0007B773 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PasstifyAutoFill/PasstifyAutoFill.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8T6B4S774L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PasstifyAutoFill/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PasstifyAutoFill;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.longphan.passtify.autofill;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "auto fill provisioning + autofill + appgroup";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6BAA749D2DD89ACB0007B773 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PasstifyAutoFill/PasstifyAutoFill.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8T6B4S774L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PasstifyAutoFill/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PasstifyAutoFill;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.longphan.passtify.autofill;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "auto fill provisioning + autofill + appgroup";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -973,6 +1136,15 @@
 			buildConfigurations = (
 				6B4D8BE52DC0C93E00103278 /* Debug */,
 				6B4D8BE62DC0C93E00103278 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6BAA749F2DD89ACB0007B773 /* Build configuration list for PBXNativeTarget "PasstifyAutoFill" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BAA749C2DD89ACB0007B773 /* Debug */,
+				6BAA749D2DD89ACB0007B773 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
