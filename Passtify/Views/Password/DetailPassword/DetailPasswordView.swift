@@ -20,9 +20,15 @@ struct DetailPasswordView: View {
                 if editing {
                     EditableHeaderCard()
                     EditableInfoCard()
+                    EditableNoteCard()
                 } else {
                     HeaderCard()
                     InfoCard()
+                    if let note = viewModel.passwordItem.notes,
+                       !note.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        NoteCard(note: note)
+                    }
+                    
                 }
                 
                 if editing {
@@ -46,7 +52,7 @@ struct DetailPasswordView: View {
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(editing ? "key.cancel".localized : "key.edit".localized) {
+                Button(editing ? "key.save".localized : "key.edit".localized) {
                     if editing {
                         viewModel.updateItem(newItem: tempItem)
                     } else {
@@ -100,6 +106,27 @@ struct DetailPasswordView: View {
         .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
     }
     
+    private func NoteCard(note: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("key.note".localized)
+                .font(.caption)
+                .foregroundColor(.secondary)
+            
+            Text(note)
+                .font(.body)
+                .foregroundColor(.primary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemGroupedBackground))
+        )
+        .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
+    }
+    
+    
     private func EditableHeaderCard() -> some View {
         HStack(spacing: 16) {
             Circle()
@@ -136,6 +163,32 @@ struct DetailPasswordView: View {
                 .fill(Color(UIColor.secondarySystemGroupedBackground))
         )
         .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
+    }
+    
+    private func EditableNoteCard() -> some View {
+        ZStack(alignment: .topLeading) {
+            TextEditor(text: Binding(
+                get: { tempItem.notes ?? "" },
+                set: { tempItem.notes = $0.isEmpty ? nil : $0 }
+            ))
+            .frame(height: 100)
+            .scrollContentBackground(.hidden) // Ẩn nền cuộn mặc định (iOS 16+)
+            .background(Color.white)
+            .foregroundColor((tempItem.notes ?? "").isEmpty ? .gray : .primary)
+            
+            if (tempItem.notes ?? "").isEmpty {
+                Text("key.add_note".localized)
+                    .foregroundColor(.gray)
+                    .padding(.top, 8)
+                    .padding(.horizontal, 5)
+            }
+        }.padding()
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color(UIColor.secondarySystemGroupedBackground))
+            )
+            .shadow(color: Color.black.opacity(0.05), radius: 2, y: 1)
+        
     }
     
     private func DeleteButtonSection() -> some View {
@@ -201,4 +254,3 @@ struct DetailPasswordView: View {
     }
     
 }
-
