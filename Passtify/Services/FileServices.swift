@@ -21,16 +21,14 @@ final class FileService: FileServiceProtocol {
             let fileManager = FileManager.default
 
             do {
-                let passwordURL = self.passwordUrl()
-                let deletedPasswordURL = self.deletePasswordUrl()
 
                 // Bắt buộc phải có file passwords.enc
-                guard fileManager.fileExists(atPath: passwordURL.path) else {
+                guard fileManager.fileExists(atPath: FilePath.password.path) else {
                     throw ExportError.noFile
                 }
 
                 let tempDirectory = fileManager.temporaryDirectory
-                let zipURL = tempDirectory.appendingPathComponent("PasswordsBackup.zip")
+                let zipURL = tempDirectory.appendingPathComponent(Constants.FileName.zipBackup)
 
                 if fileManager.fileExists(atPath: zipURL.path) {
                     try fileManager.removeItem(at: zipURL)
@@ -38,10 +36,10 @@ final class FileService: FileServiceProtocol {
 
                 let archive = try Archive(url: zipURL, accessMode: .create)
 
-                try archive.addEntry(with: "passwords.enc", fileURL: passwordURL)
+                try archive.addEntry(with: Constants.FileName.password, fileURL: FilePath.password)
 
-                if fileManager.fileExists(atPath: deletedPasswordURL.path) {
-                    try archive.addEntry(with: "deletepasswords.enc", fileURL: deletedPasswordURL)
+                if fileManager.fileExists(atPath: FilePath.deletedPassword.path) {
+                    try archive.addEntry(with: Constants.FileName.deletedPassword, fileURL: FilePath.deletedPassword)
                 }
 
                 promise(.success(zipURL))
@@ -58,7 +56,7 @@ final class FileService: FileServiceProtocol {
     func importEncryptedDataFromZip(_ zipURL: URL) -> AnyPublisher<Void, Error> {
         return Future<Void, Error> { promise in
             let fileManager = FileManager.default
-            let destinationURL = fileManager.temporaryDirectory.appendingPathComponent("ImportTemp", isDirectory: true)
+            let destinationURL = fileManager.temporaryDirectory.appendingPathComponent(Constants.TempDirectory.importFolder, isDirectory: true)
             
             do {
                 // Xoá thư mục tạm nếu đã tồn tại
@@ -72,11 +70,11 @@ final class FileService: FileServiceProtocol {
                 try fileManager.unzipItem(at: zipURL, to: destinationURL)
                 
                 // Kiểm tra và copy từng file nếu tồn tại
-                let extractedPasswordURL = destinationURL.appendingPathComponent("passwords.enc")
-                let extractedDeletedURL = destinationURL.appendingPathComponent("deletepasswords.enc")
+                let extractedPasswordURL = destinationURL.appendingPathComponent(Constants.FileName.password)
+                let extractedDeletedURL = destinationURL.appendingPathComponent(Constants.FileName.deletedPassword)
                 
                 if fileManager.fileExists(atPath: extractedPasswordURL.path) {
-                    let destinationPassword = self.passwordUrl()
+                    let destinationPassword = FilePath.password
                     if fileManager.fileExists(atPath: destinationPassword.path) {
                         try fileManager.removeItem(at: destinationPassword)
                     }
@@ -84,7 +82,7 @@ final class FileService: FileServiceProtocol {
                 }
                 
                 if fileManager.fileExists(atPath: extractedDeletedURL.path) {
-                    let destinationDeleted = self.deletePasswordUrl()
+                    let destinationDeleted = FilePath.deletedPassword
                     if fileManager.fileExists(atPath: destinationDeleted.path) {
                         try fileManager.removeItem(at: destinationDeleted)
                     }
@@ -98,16 +96,4 @@ final class FileService: FileServiceProtocol {
         }
         .eraseToAnyPublisher()
     }
-    
-    private func passwordUrl() -> URL {
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent("passwords.enc")
-        return url
-    }
-    
-    private func deletePasswordUrl() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent("deletepasswords.enc")
-    }
-    
 }

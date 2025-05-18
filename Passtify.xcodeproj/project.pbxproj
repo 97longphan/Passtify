@@ -47,6 +47,12 @@
 		6BAA74692DD4FF660007B773 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74682DD4FF550007B773 /* String+Extensions.swift */; };
 		6BAA748F2DD89ACB0007B773 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BAA748E2DD89ACB0007B773 /* AuthenticationServices.framework */; };
 		6BAA749A2DD89ACB0007B773 /* PasstifyAutoFill.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6BAA748D2DD89ACB0007B773 /* PasstifyAutoFill.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6BAA74A32DD8B9B50007B773 /* PasswordItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA712DC3424300A6A90D /* PasswordItemModel.swift */; };
+		6BAA74A62DD8BF750007B773 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74A52DD8BF5C0007B773 /* AppConstants.swift */; };
+		6BAA74A72DD8C4890007B773 /* CryptoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD94B292DC86CCE005BF242 /* CryptoManager.swift */; };
+		6BAA74A82DD8C4930007B773 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74A52DD8BF5C0007B773 /* AppConstants.swift */; };
+		6BAA74A92DD8DEA60007B773 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F956F2DC0DC6B00C689FE /* AuthService.swift */; };
+		6BAA74AD2DD9980A0007B773 /* PasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF224A92DC38BB10077F204 /* PasswordService.swift */; };
 		6BCF43352DC137B500269B4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCF43342DC137AA00269B4B /* AppDelegate.swift */; };
 		6BCF43372DC1416D00269B4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BCF43362DC1416D00269B4B /* GoogleService-Info.plist */; };
 		6BD94B2A2DC86CD2005BF242 /* CryptoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD94B292DC86CCE005BF242 /* CryptoManager.swift */; };
@@ -148,6 +154,7 @@
 		6BAA748D2DD89ACB0007B773 /* PasstifyAutoFill.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PasstifyAutoFill.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BAA748E2DD89ACB0007B773 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		6BAA74A02DD89B270007B773 /* Passtify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Passtify.entitlements; sourceTree = "<group>"; };
+		6BAA74A52DD8BF5C0007B773 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		6BCF43342DC137AA00269B4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6BCF43362DC1416D00269B4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6BD94B292DC86CCE005BF242 /* CryptoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoManager.swift; sourceTree = "<group>"; };
@@ -381,6 +388,7 @@
 		6B89AA492DC14E8E00A6A90D /* Ultils */ = {
 			isa = PBXGroup;
 			children = (
+				6BAA74A52DD8BF5C0007B773 /* AppConstants.swift */,
 				6BD94B292DC86CCE005BF242 /* CryptoManager.swift */,
 			);
 			path = Ultils;
@@ -673,6 +681,7 @@
 				6BCF43352DC137B500269B4B /* AppDelegate.swift in Sources */,
 				6BD94B382DC8B808005BF242 /* DetailPasswordViewModel.swift in Sources */,
 				6BAA74552DD3B2170007B773 /* LocalizationManager.swift in Sources */,
+				6BAA74A62DD8BF750007B773 /* AppConstants.swift in Sources */,
 				6B89AA4D2DC14F0200A6A90D /* UIApplication+Extensions.swift in Sources */,
 				6B6F95512DC0CEF100C689FE /* AppAssembler.swift in Sources */,
 				6BF473992DCE407500CA10B3 /* PasswordListCardItemView.swift in Sources */,
@@ -722,6 +731,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BAA74A32DD8B9B50007B773 /* PasswordItemModel.swift in Sources */,
+				6BAA74A72DD8C4890007B773 /* CryptoManager.swift in Sources */,
+				6BAA74A92DD8DEA60007B773 /* AuthService.swift in Sources */,
+				6BAA74AD2DD9980A0007B773 /* PasswordService.swift in Sources */,
+				6BAA74A82DD8C4930007B773 /* AppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

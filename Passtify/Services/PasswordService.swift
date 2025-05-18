@@ -39,17 +39,7 @@ final class PasswordService: PasswordServiceProtocol {
 
     
     func savePasswords(_ passwords: [PasswordItemModel]) -> AnyPublisher<Void, Error> {
-        return Future<Void, Error> { promise in
-            do {
-                let encoded = try JSONEncoder().encode(passwords)
-                let encrypted = try CryptoManager.encrypt(data: encoded, password: self.masterPassword)
-                try encrypted.write(to: self.passwordUrl())
-                promise(.success(()))
-            } catch {
-                promise(.failure(error))
-            }
-        }
-        .eraseToAnyPublisher()
+        save(passwords, to: FilePath.password)
     }
     
     func addPassword(_ password: PasswordItemModel) -> AnyPublisher<[PasswordItemModel], Error> {
@@ -65,22 +55,7 @@ final class PasswordService: PasswordServiceProtocol {
     }
     
     func loadPasswords() -> AnyPublisher<[PasswordItemModel], Error> {
-        return Future<[PasswordItemModel], Error> { promise in
-            do {
-                let encryptedData = try Data(contentsOf: self.passwordUrl())
-                let decryptedData = try CryptoManager.decrypt(encryptedData: encryptedData, password: self.masterPassword)
-                let decoded = try JSONDecoder().decode([PasswordItemModel].self, from: decryptedData)
-                let sorted = decoded.sorted { $0.creationDate > $1.creationDate }
-                promise(.success(sorted))
-            } catch {
-                if (error as NSError).code == NSFileReadNoSuchFileError {
-                    promise(.success([]))
-                } else {
-                    promise(.failure(error))
-                }
-            }
-        }
-        .eraseToAnyPublisher()
+        load(FilePath.password)
     }
     
     func updatePassword(_ updatedItem: PasswordItemModel) -> AnyPublisher<Void, Error> {
@@ -100,44 +75,12 @@ final class PasswordService: PasswordServiceProtocol {
             .eraseToAnyPublisher()
     }
     
-    
-    private func passwordUrl() -> URL {
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent("passwords.enc")
-        return url
-    }
-    
     func saveDeletedPasswords(_ passwords: [PasswordItemModel]) -> AnyPublisher<Void, Error> {
-        return Future<Void, Error> { promise in
-            do {
-                let encoded = try JSONEncoder().encode(passwords)
-                let encrypted = try CryptoManager.encrypt(data: encoded, password: self.masterPassword)
-                try encrypted.write(to: self.deletePasswordUrl())
-                promise(.success(()))
-            } catch {
-                promise(.failure(error))
-            }
-        }
-        .eraseToAnyPublisher()
+        save(passwords, to: FilePath.deletedPassword)
     }
     
     func loadDeletedPasswords() -> AnyPublisher<[PasswordItemModel], Error> {
-        return Future<[PasswordItemModel], Error> { promise in
-            do {
-                let encryptedData = try Data(contentsOf: self.deletePasswordUrl())
-                let decryptedData = try CryptoManager.decrypt(encryptedData: encryptedData, password: self.masterPassword)
-                let decoded = try JSONDecoder().decode([PasswordItemModel].self, from: decryptedData)
-                let sorted = decoded.sorted { $0.creationDate > $1.creationDate }
-                promise(.success(sorted))
-            } catch {
-                if (error as NSError).code == NSFileReadNoSuchFileError {
-                    promise(.success([]))
-                } else {
-                    promise(.failure(error))
-                }
-            }
-        }
-        .eraseToAnyPublisher()
+        load(FilePath.deletedPassword)
     }
     
     func addDeletedPassword(_ password: PasswordItemModel) -> AnyPublisher<Void, Error> {
@@ -168,9 +111,38 @@ final class PasswordService: PasswordServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
+
+}
+
+extension PasswordService {
+    private func load(_ file: URL) -> AnyPublisher<[PasswordItemModel], Error> {
+        Future { promise in
+            do {
+                let encryptedData = try Data(contentsOf: file)
+                let decrypted = try CryptoManager.decrypt(encryptedData: encryptedData, password: self.masterPassword)
+                let decoded = try JSONDecoder().decode([PasswordItemModel].self, from: decrypted)
+                promise(.success(decoded.sorted { $0.creationDate > $1.creationDate }))
+            } catch {
+                if (error as NSError).code == NSFileReadNoSuchFileError {
+                    promise(.success([]))
+                } else {
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
     
-    private func deletePasswordUrl() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            .appendingPathComponent("deletepasswords.enc")
+    private func save(_ passwords: [PasswordItemModel], to file: URL) -> AnyPublisher<Void, Error> {
+        Future { promise in
+            do {
+                let encoded = try JSONEncoder().encode(passwords)
+                let encrypted = try CryptoManager.encrypt(data: encoded, password: self.masterPassword)
+                try encrypted.write(to: file)
+                print("🔐 Saving passwords to: \(FilePath.password.path)")
+                promise(.success(()))
+            } catch {
+                promise(.failure(error))
+            }
+        }.eraseToAnyPublisher()
     }
 }

@@ -173,7 +173,7 @@ struct DetailPasswordView: View {
             ))
             .frame(height: 100)
             .scrollContentBackground(.hidden) // Ẩn nền cuộn mặc định (iOS 16+)
-            .background(Color.white)
+            .background(Color(UIColor.secondarySystemGroupedBackground))
             .foregroundColor((tempItem.notes ?? "").isEmpty ? .gray : .primary)
             
             if (tempItem.notes ?? "").isEmpty {
