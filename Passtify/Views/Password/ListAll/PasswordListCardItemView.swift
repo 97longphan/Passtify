@@ -18,13 +18,13 @@ struct PasswordListCardItemView: View {
                         .fill(Color(UIColor.systemGray5))
                         .frame(width: 44, height: 44)
                     
-                    Text(passwordItem.label.prefix(1).uppercased())
+                    Text(passwordItem.domainOrLabel.prefix(1).uppercased())
                         .font(.headline)
                         .foregroundColor(.primary)
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(passwordItem.label)
+                    Text(passwordItem.domainOrLabel)
                         .font(.body)
                         .foregroundColor(.primary)
                     

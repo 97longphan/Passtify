@@ -20,7 +20,8 @@ struct NewPasswordView: View {
                             .foregroundColor(.yellow)
                             .padding(.leading, 4)
                         
-                        TextField("key.website_or_label".localized, text: $viewModel.input.label)
+                        TextField("key.website_or_label".localized, text: $viewModel.input.domainOrLabel)
+                            .keyboardType(.emailAddress)
                             .font(.headline)
                     }
                     .padding(.vertical, 4)
@@ -29,6 +30,7 @@ struct NewPasswordView: View {
                         Text("key.username".localized)
                         Spacer()
                         TextField("key.user".localized, text: $viewModel.input.userName)
+                            .keyboardType(.emailAddress)
                             .multilineTextAlignment(.trailing)
                             .foregroundColor(.gray)
                     }

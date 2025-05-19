@@ -8,6 +8,14 @@
 		<string>com.apple.authentication-services-credential-provider-ui</string>
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).CredentialProviderViewController</string>
+        <key>NSExtensionAttributes</key>
+            <dict>
+                <key>ASCredentialProviderExtensionCapabilities</key>
+                <array>
+                    <string>ProvidesPasswords</string>
+                    <string>SupportsAutofillWithoutUI</string>
+                </array>
+            </dict>
 	</dict>
 </dict>
 </plist>

@@ -27,7 +27,7 @@ final class CryptoManager {
     }
 
     /// Mã hóa dữ liệu bằng AES-GCM
-    static func encrypt(data: Data, password: String) throws -> Data {
+    static func encrypt(data: Data, password: String = "") throws -> Data {
         let salt = Data((0..<16).map { _ in UInt8.random(in: 0...255) })
         let key = deriveKey(from: password, salt: salt)
         let nonce = AES.GCM.Nonce()
@@ -39,7 +39,7 @@ final class CryptoManager {
     }
 
     /// Giải mã dữ liệu đã mã hóa bằng AES-GCM
-    static func decrypt(encryptedData: Data, password: String) throws -> Data {
+    static func decrypt(encryptedData: Data, password: String = "") throws -> Data {
         guard encryptedData.count > (16 + 12 + 16) else {
             throw CryptoError.invalidData
         }

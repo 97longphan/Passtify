@@ -39,7 +39,7 @@ class DeletedPasswordListViewModel: ViewModel {
                     return list
                 } else {
                     return list.filter {
-                        $0.label.localizedCaseInsensitiveContains(term) ||
+                        $0.domainOrLabel.localizedCaseInsensitiveContains(term) ||
                         $0.userName.localizedCaseInsensitiveContains(term)
                     }
                 }

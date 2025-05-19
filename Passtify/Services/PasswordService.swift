@@ -6,6 +6,7 @@
 //
 import Combine
 import Foundation
+import AuthenticationServices
 
 protocol PasswordServiceProtocol {
     func savePasswords(_ passwords: [PasswordItemModel]) -> AnyPublisher<Void, Error>
@@ -22,7 +23,6 @@ protocol PasswordServiceProtocol {
 }
 
 final class PasswordService: PasswordServiceProtocol {
-    private let masterPassword = "12345"
     
     func deletePassword(_ item: PasswordItemModel) -> AnyPublisher<Void, Error> {
         return loadPasswords()
@@ -119,8 +119,9 @@ extension PasswordService {
         Future { promise in
             do {
                 let encryptedData = try Data(contentsOf: file)
-                let decrypted = try CryptoManager.decrypt(encryptedData: encryptedData, password: self.masterPassword)
+                let decrypted = try CryptoManager.decrypt(encryptedData: encryptedData)
                 let decoded = try JSONDecoder().decode([PasswordItemModel].self, from: decrypted)
+                self.saveAllCredentialIdentities(from: decoded)
                 promise(.success(decoded.sorted { $0.creationDate > $1.creationDate }))
             } catch {
                 if (error as NSError).code == NSFileReadNoSuchFileError {
@@ -133,10 +134,11 @@ extension PasswordService {
     }
     
     private func save(_ passwords: [PasswordItemModel], to file: URL) -> AnyPublisher<Void, Error> {
+        
         Future { promise in
             do {
                 let encoded = try JSONEncoder().encode(passwords)
-                let encrypted = try CryptoManager.encrypt(data: encoded, password: self.masterPassword)
+                let encrypted = try CryptoManager.encrypt(data: encoded)
                 try encrypted.write(to: file)
                 print("🔐 Saving passwords to: \(FilePath.password.path)")
                 promise(.success(()))
@@ -145,4 +147,26 @@ extension PasswordService {
             }
         }.eraseToAnyPublisher()
     }
+    
+    
+    func saveAllCredentialIdentities(from credentials: [PasswordItemModel]) {
+        let identities = credentials.compactMap { item -> ASPasswordCredentialIdentity? in
+            let domain = item.domainOrLabel
+            return ASPasswordCredentialIdentity(
+                serviceIdentifier: ASCredentialServiceIdentifier(identifier: domain, type: .domain),
+                user: item.userName,
+                recordIdentifier: item.id.uuidString
+            )
+        }
+
+        ASCredentialIdentityStore.shared.replaceCredentialIdentities(with: identities) { success, error in
+            if success {
+                print("✅ Saved \(identities.count) credential identities")
+            } else {
+                print("❌ Failed to save credential identities: \(error?.localizedDescription ?? "unknown error")")
+            }
+        }
+        
+    }
+
 }

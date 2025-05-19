@@ -17,7 +17,7 @@ struct CredentialListView: View {
             List(credentials) { item in
                 Button(action: { onSelect(item) }) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(item.label).font(.headline)
+                        Text(item.domainOrLabel).font(.headline)
                         Text(item.userName).font(.subheadline)
                     }
                     .padding(.vertical, 6)

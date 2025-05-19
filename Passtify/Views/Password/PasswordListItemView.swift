@@ -17,13 +17,13 @@ struct PasswordListItemView: View {
                 Circle()
                     .fill(Color.gray.opacity(0.3)) // Màu xám nhạt
                     .frame(width: 40, height: 40)
-                Text(passwordItem.label.prefix(1).uppercased())
+                Text(passwordItem.domainOrLabel.prefix(1).uppercased())
                     .font(.headline)
                     .foregroundStyle(.primary)
             }
             
             VStack(alignment: .leading) {
-                Text(passwordItem.label)
+                Text(passwordItem.domainOrLabel)
                     .font(.headline)
                     .foregroundColor(.primary)
                 Text(passwordItem.userName) // Hoặc một đoạn mô tả khác
@@ -44,5 +44,5 @@ struct PasswordListItemView: View {
 }
 
 #Preview {
-    PasswordListItemView(passwordItem: PasswordItemModel.init(label: "", userName: "", password: ""))
+    PasswordListItemView(passwordItem: PasswordItemModel.init(domainOrLabel: "", userName: "", password: ""))
 }

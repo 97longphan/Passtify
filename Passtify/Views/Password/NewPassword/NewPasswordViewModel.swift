@@ -46,7 +46,7 @@ class NewPasswordViewModel: ViewModel {
     }
     
     func isFormValid() -> Bool {
-        !input.label.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !input.domainOrLabel.trimmingCharacters(in: .whitespaces).isEmpty &&
         !input.userName.trimmingCharacters(in: .whitespaces).isEmpty &&
         !input.password.trimmingCharacters(in: .whitespaces).isEmpty
     }

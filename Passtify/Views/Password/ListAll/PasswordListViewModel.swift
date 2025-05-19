@@ -40,7 +40,7 @@ class PasswordListViewModel: ViewModel {
                     return list
                 } else {
                     return list.filter {
-                        $0.label.localizedCaseInsensitiveContains(term) ||
+                        $0.domainOrLabel.localizedCaseInsensitiveContains(term) ||
                         $0.userName.localizedCaseInsensitiveContains(term)
                     }
                 }
@@ -50,10 +50,10 @@ class PasswordListViewModel: ViewModel {
                 self?.filteredList = filtered
                 
                 let grouped = Dictionary(grouping: filtered) { item -> String in
-                    let first = item.label.first?.uppercased() ?? "#"
+                    let first = item.domainOrLabel.first?.uppercased() ?? "#"
                     return first.range(of: "[A-Z]", options: .regularExpression) != nil ? first : "#"
                 }
-                self?.groupedList = grouped.mapValues { $0.sorted { $0.label < $1.label } }
+                self?.groupedList = grouped.mapValues { $0.sorted { $0.domainOrLabel < $1.domainOrLabel } }
             }
             .store(in: &cancellables)
     }

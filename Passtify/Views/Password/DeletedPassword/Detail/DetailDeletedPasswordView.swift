@@ -19,13 +19,13 @@ struct DetailDeletedPasswordView: View {
                         .fill(Color.gray)
                         .frame(width: 50, height: 50)
                         .overlay(
-                            Text(viewModel.passwordItem.label.prefix(1).uppercased())
+                            Text(viewModel.passwordItem.domainOrLabel.prefix(1).uppercased())
                                 .font(.title)
                                 .foregroundColor(.white)
                         )
                     
                     VStack(alignment: .leading) {
-                        Text(viewModel.passwordItem.label)
+                        Text(viewModel.passwordItem.domainOrLabel)
                             .font(.headline)
                             .bold()
                         Text(String(format: "key.modified_value".localized, formattedDate(viewModel.passwordItem.creationDate)))

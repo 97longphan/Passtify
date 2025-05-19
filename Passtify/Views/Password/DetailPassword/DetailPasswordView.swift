@@ -69,11 +69,11 @@ struct DetailPasswordView: View {
             Circle()
                 .fill(Color(UIColor.systemGray5))
                 .frame(width: 48, height: 48)
-                .overlay(Text(viewModel.passwordItem.label.prefix(1).uppercased())
+                .overlay(Text(viewModel.passwordItem.domainOrLabel.prefix(1).uppercased())
                     .font(.title2).bold())
             
             VStack(alignment: .leading) {
-                Text(viewModel.passwordItem.label)
+                Text(viewModel.passwordItem.domainOrLabel)
                     .font(.title3).bold()
                 Text(String(format: "key.modified_value".localized, formattedDate(viewModel.passwordItem.creationDate)))
                     .font(.caption)
@@ -132,11 +132,12 @@ struct DetailPasswordView: View {
             Circle()
                 .fill(Color(UIColor.systemGray5))
                 .frame(width: 48, height: 48)
-                .overlay(Text(tempItem.label.prefix(1).uppercased())
+                .overlay(Text(tempItem.domainOrLabel.prefix(1).uppercased())
                     .font(.title2).bold())
             
             VStack(alignment: .leading) {
-                TextField("key.username", text: $tempItem.label)
+                TextField("key.username", text: $tempItem.domainOrLabel)
+                    .keyboardType(.emailAddress)
                     .font(.title3).bold()
                 Text(String(format: "key.modified_value".localized, formattedDate(viewModel.passwordItem.creationDate)))
                     .font(.caption)
@@ -154,7 +155,7 @@ struct DetailPasswordView: View {
     
     private func EditableInfoCard() -> some View {
         VStack(spacing: 12) {
-            EditableRow(title: "key.username".localized, text: $tempItem.userName)
+            EditableRow(title: "key.username".localized, text: $tempItem.userName, keyboardType: .emailAddress)
             EditableRow(title: "key.password".localized, text: $tempItem.password)
         }
         .padding()
@@ -230,12 +231,13 @@ struct DetailPasswordView: View {
         }
     }
     
-    private func EditableRow(title: String, text: Binding<String>) -> some View {
+    private func EditableRow(title: String, text: Binding<String>, keyboardType: UIKeyboardType = .default) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.caption)
                 .foregroundColor(.secondary)
             TextField("", text: text)
+                .keyboardType(keyboardType)
                 .font(.body)
                 .foregroundColor(.primary)
         }
