@@ -14,15 +14,13 @@ struct PasswordItemModel: Identifiable, Codable, Equatable, Hashable {
     var password: String
     var creationDate = Date()
     var notes: String?
-    var domain: String?
     
     static var empty: PasswordItemModel {
         PasswordItemModel(
             label: "",
             userName: "",
             password: "",
-            notes: nil,
-            domain: nil
+            notes: nil
         )
     }
 }

@@ -19,9 +19,6 @@ struct CredentialListView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(item.label).font(.headline)
                         Text(item.userName).font(.subheadline)
-                        if let domain = item.domain {
-                            Text(domain).font(.caption).foregroundColor(.gray)
-                        }
                     }
                     .padding(.vertical, 6)
                 }

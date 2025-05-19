@@ -21,7 +21,7 @@ final class CredentialProviderViewController: ASCredentialProviderViewController
     
     private func showSwiftUI() {
         let view = CredentialRootView(
-            credentials: viewModel.matchedCredentials,
+            credentials: viewModel.credentials,
             onSelect: { selected in
                 let credential = ASPasswordCredential(user: selected.userName, password: selected.password)
                 self.extensionContext.completeRequest(withSelectedCredential: credential)
