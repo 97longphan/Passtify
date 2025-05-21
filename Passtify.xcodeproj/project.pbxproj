@@ -10,7 +10,6 @@
 		6B3324C42DCE8F51009D2DAD /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3324C32DCE8F4A009D2DAD /* Bundle+Extensions.swift */; };
 		6B4D8BBE2DC0C93B00103278 /* PasstifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D8BBD2DC0C93B00103278 /* PasstifyApp.swift */; };
 		6B4D8BC22DC0C93D00103278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B4D8BC12DC0C93D00103278 /* Assets.xcassets */; };
-		6B4D8BC52DC0C93D00103278 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B4D8BC42DC0C93D00103278 /* Preview Assets.xcassets */; };
 		6B4D8BCF2DC0C93E00103278 /* PasstifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D8BCE2DC0C93E00103278 /* PasstifyTests.swift */; };
 		6B4D8BD92DC0C93E00103278 /* PasstifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D8BD82DC0C93E00103278 /* PasstifyUITests.swift */; };
 		6B4D8BDB2DC0C93E00103278 /* PasstifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D8BDA2DC0C93E00103278 /* PasstifyUITestsLaunchTests.swift */; };
@@ -129,7 +128,6 @@
 		6B4D8BBA2DC0C93B00103278 /* Passtify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Passtify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4D8BBD2DC0C93B00103278 /* PasstifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasstifyApp.swift; sourceTree = "<group>"; };
 		6B4D8BC12DC0C93D00103278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6B4D8BC42DC0C93D00103278 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6B4D8BCA2DC0C93E00103278 /* PasstifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasstifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4D8BCE2DC0C93E00103278 /* PasstifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasstifyTests.swift; sourceTree = "<group>"; };
 		6B4D8BD42DC0C93E00103278 /* PasstifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasstifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,17 +277,8 @@
 				6B6F95442DC0CEDC00C689FE /* AppCoordinator */,
 				6B6F95602DC0D14800C689FE /* Extensions */,
 				6B4D8BC12DC0C93D00103278 /* Assets.xcassets */,
-				6B4D8BC32DC0C93D00103278 /* Preview Content */,
 			);
 			path = Passtify;
-			sourceTree = "<group>";
-		};
-		6B4D8BC32DC0C93D00103278 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				6B4D8BC42DC0C93D00103278 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		6B4D8BCD2DC0C93E00103278 /* PasstifyTests */ = {
@@ -653,7 +642,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BAA74622DD3B8A20007B773 /* Localizable.strings in Resources */,
-				6B4D8BC52DC0C93D00103278 /* Preview Assets.xcassets in Resources */,
 				6B4D8BC22DC0C93D00103278 /* Assets.xcassets in Resources */,
 				6BCF43372DC1416D00269B4B /* GoogleService-Info.plist in Resources */,
 			);
@@ -930,7 +918,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Passtify/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8T6B4S774L;
 				ENABLE_PREVIEWS = YES;
@@ -973,7 +960,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Passtify/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8T6B4S774L;
 				ENABLE_PREVIEWS = YES;
