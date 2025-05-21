@@ -22,7 +22,7 @@ final class AuthenticationViewModel: ObservableObject {
     
     func authenticate() {
     #if targetEnvironment(simulator)
-        completion(true)
+        session.isAuthenticated = true
     #else
         authService.authenticateUser()
             .receive(on: DispatchQueue.main)
