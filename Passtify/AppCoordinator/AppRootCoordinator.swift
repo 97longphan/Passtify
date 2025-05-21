@@ -26,8 +26,6 @@ class AppRootCoordinator: ObservableObject {
     @Published var newPasswordViewModel: NewPasswordViewModel?
     @Published private(set) var homeViewModel: HomeViewModel!
     @Published private(set) var authenViewModel: AuthenticationViewModel!
-    @Published var didCancelLastAttempt = true
-    @Published var isAuthenticated = false
     @Published var exportFileURL: ExportFile?
     @Published var isImportingZip: Bool = false
     private let authService: AuthServiceProtocol = AuthService()
@@ -71,21 +69,6 @@ class AppRootCoordinator: ObservableObject {
     
     func pop() {
         path.removeLast()
-    }
-    
-    func auth(completion:  @escaping ((Bool) -> Void)) {
-        authService.authenticateUser { [weak self] success, errorCode in
-            DispatchQueue.main.async {
-                if success {
-                    self?.didCancelLastAttempt = false
-                } else {
-                    if errorCode == .userCancel || errorCode == .systemCancel {
-                        self?.didCancelLastAttempt = true
-                    }
-                }
-                completion(success)
-            }
-        }
     }
 }
 

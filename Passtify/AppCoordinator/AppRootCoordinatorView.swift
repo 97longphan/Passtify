@@ -29,8 +29,19 @@ struct AppRootCoordinatorView: View {
             
             
         } else {
-            NavigationStack {
-                AuthenticationView(viewModel: coordinator.authenViewModel)
+            ZStack {
+                NavigationStack {
+                    AuthenticationView(viewModel: coordinator.authenViewModel)
+                }
+
+                if toastManager.isPresented {
+                    VStack {
+                        Spacer()
+                        OverlayToastView(message: toastManager.message, type: toastManager.type)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                            .padding(.horizontal)
+                    }
+                }
             }
         }
     }

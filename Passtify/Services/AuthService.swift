@@ -6,22 +6,28 @@
 //
 
 import LocalAuthentication
+import Combine
 
 protocol AuthServiceProtocol {
-    func authenticateUser(completion: @escaping (Bool, LAError.Code?) -> Void)
+    func authenticateUser() -> AnyPublisher<Void, AuthenError>
 }
 
+
 final class AuthService: AuthServiceProtocol {
-    func authenticateUser(completion: @escaping (Bool, LAError.Code?) -> Void) {
-        let context = LAContext()
-        let reason = "Xác thực để truy cập dữ liệu"
-        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
-            if success {
-                completion(true, nil)
-            } else {
-                let laErrorCode = (error as? LAError)?.code
-                completion(false, laErrorCode)
+    func authenticateUser() -> AnyPublisher<Void, AuthenError> {
+            Future { promise in
+                let context = LAContext()
+                let reason = "Xác thực để truy cập dữ liệu"
+                
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
+                    if success {
+                        promise(.success(()))
+                    } else {
+                        let code = (error as? LAError)?.code
+                        promise(.failure(AuthenError.from(code)))
+                    }
+                }
             }
+            .eraseToAnyPublisher()
         }
-    }
 }

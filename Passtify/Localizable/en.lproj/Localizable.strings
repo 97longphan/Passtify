@@ -60,3 +60,15 @@
 
 "key.security_tip_title" = "Security Tip";
 "key.default_tip_text" = "Click here for a tip ^^";
+
+"authen.authentication_failed" = "Authentication failed";
+"authen.user_fallback" = "You chose another authentication method";
+"authen.system_cancel" = "The system cancelled authentication";
+"authen.passcode_not_set" = "Device passcode is not set";
+"authen.biometry_not_available" = "Biometric authentication is not available";
+"authen.biometry_not_enrolled" = "No biometric identity is enrolled";
+"authen.biometry_lockout" = "Biometrics are locked due to too many failed attempts";
+"authen.app_cancel" = "The app cancelled authentication";
+"authen.invalid_context" = "Invalid authentication context";
+"authen.not_interactive" = "Authentication failed because UI is not interactive";
+"authen.unknown" = "Unknown error occurred";

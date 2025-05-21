@@ -60,3 +60,15 @@
 
 "key.security_tip_title" = "Mẹo bảo mật";
 "key.default_tip_text" = "Click vô đây tôi cho bạn tip nè ^^";
+
+"authen.authentication_failed" = "Xác thực thất bại";
+"authen.user_fallback" = "Bạn đã chọn phương thức xác thực khác";
+"authen.system_cancel" = "Hệ thống đã hủy xác thực";
+"authen.passcode_not_set" = "Thiết bị chưa cài mật mã";
+"authen.biometry_not_available" = "Thiết bị không hỗ trợ sinh trắc học";
+"authen.biometry_not_enrolled" = "Chưa thiết lập Face ID / Touch ID";
+"authen.biometry_lockout" = "Bạn đã thử quá nhiều lần";
+"authen.app_cancel" = "Ứng dụng đã hủy xác thực";
+"authen.invalid_context" = "Ngữ cảnh xác thực không hợp lệ";
+"authen.not_interactive" = "Không thể xác thực vì giao diện không tương tác";
+"authen.unknown" = "Lỗi không xác định";

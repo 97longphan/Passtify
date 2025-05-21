@@ -10,7 +10,7 @@ import Swinject
 class ViewModelAssembly: Assembly {
     func assemble(container: Container) {
         container.register(AuthenticationViewModel.self) { r in
-            AuthenticationViewModel(authService: r.resolved(AuthServiceProtocol.self))
+            AuthenticationViewModel(authService: r.resolved(AuthServiceProtocol.self), session: r.resolved(AppSession.self))
         }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
         
         

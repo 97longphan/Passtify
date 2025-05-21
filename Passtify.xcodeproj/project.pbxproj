@@ -14,6 +14,9 @@
 		6B4D8BCF2DC0C93E00103278 /* PasstifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D8BCE2DC0C93E00103278 /* PasstifyTests.swift */; };
 		6B4D8BD92DC0C93E00103278 /* PasstifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D8BD82DC0C93E00103278 /* PasstifyUITests.swift */; };
 		6B4D8BDB2DC0C93E00103278 /* PasstifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D8BDA2DC0C93E00103278 /* PasstifyUITestsLaunchTests.swift */; };
+		6B52F2742DDE3B66005C78B8 /* AppSessionAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B52F2732DDE3B5E005C78B8 /* AppSessionAssembly.swift */; };
+		6B52F2752DDE3D7F005C78B8 /* AuthenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA512DC155E300A6A90D /* AuthenError.swift */; };
+		6B52F2762DDE44D8005C78B8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74682DD4FF550007B773 /* String+Extensions.swift */; };
 		6B6F95482DC0CEDC00C689FE /* CoordinatorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F95452DC0CEDC00C689FE /* CoordinatorAssembly.swift */; };
 		6B6F95492DC0CEDC00C689FE /* AppRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F95462DC0CEDC00C689FE /* AppRootCoordinator.swift */; };
 		6B6F954A2DC0CEDC00C689FE /* AppRootCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F95472DC0CEDC00C689FE /* AppRootCoordinatorView.swift */; };
@@ -31,7 +34,7 @@
 		6B7239802DCB478D00F46D1E /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B72397F2DCB478D00F46D1E /* AuthenticationView.swift */; };
 		6B7239882DCB527500F46D1E /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7239872DCB526E00F46D1E /* AuthenticationViewModel.swift */; };
 		6B89AA4D2DC14F0200A6A90D /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA4C2DC14EF700A6A90D /* UIApplication+Extensions.swift */; };
-		6B89AA522DC155E500A6A90D /* SignInError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA512DC155E300A6A90D /* SignInError.swift */; };
+		6B89AA522DC155E500A6A90D /* AuthenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA512DC155E300A6A90D /* AuthenError.swift */; };
 		6B89AA602DC2072C00A6A90D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA5F2DC2072900A6A90D /* HomeViewModel.swift */; };
 		6B89AA622DC2073A00A6A90D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA612DC2073A00A6A90D /* HomeView.swift */; };
 		6B89AA642DC31F9300A6A90D /* HomeListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA632DC31F8F00A6A90D /* HomeListItemView.swift */; };
@@ -41,7 +44,6 @@
 		6B89AA6E2DC32CD600A6A90D /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA6D2DC32CD100A6A90D /* NewPasswordViewModel.swift */; };
 		6B89AA702DC32CE000A6A90D /* NewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA6F2DC32CE000A6A90D /* NewPasswordView.swift */; };
 		6B89AA722DC3424700A6A90D /* PasswordItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA712DC3424300A6A90D /* PasswordItemModel.swift */; };
-		6B89AA742DC3428D00A6A90D /* PasswordListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA732DC3427900A6A90D /* PasswordListItemView.swift */; };
 		6BAA74552DD3B2170007B773 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74542DD3B2160007B773 /* LocalizationManager.swift */; };
 		6BAA74622DD3B8A20007B773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BAA74612DD3B8A20007B773 /* Localizable.strings */; };
 		6BAA74692DD4FF660007B773 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74682DD4FF550007B773 /* String+Extensions.swift */; };
@@ -69,6 +71,20 @@
 		6BF473A12DCE560D00CA10B3 /* ToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF473A02DCE560D00CA10B3 /* ToastManager.swift */; };
 		6BF473A32DCE5A6C00CA10B3 /* ExportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF473A22DCE5A6700CA10B3 /* ExportError.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		6BAA74E92DDBADBF0007B773 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = folder.rkassets;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# realitytool\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		6B4D8BCB2DC0C93E00103278 /* PBXContainerItemProxy */ = {
@@ -119,6 +135,7 @@
 		6B4D8BD42DC0C93E00103278 /* PasstifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasstifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4D8BD82DC0C93E00103278 /* PasstifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasstifyUITests.swift; sourceTree = "<group>"; };
 		6B4D8BDA2DC0C93E00103278 /* PasstifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasstifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6B52F2732DDE3B5E005C78B8 /* AppSessionAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionAssembly.swift; sourceTree = "<group>"; };
 		6B6F95452DC0CEDC00C689FE /* CoordinatorAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorAssembly.swift; sourceTree = "<group>"; };
 		6B6F95462DC0CEDC00C689FE /* AppRootCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRootCoordinator.swift; sourceTree = "<group>"; };
 		6B6F95472DC0CEDC00C689FE /* AppRootCoordinatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRootCoordinatorView.swift; sourceTree = "<group>"; };
@@ -136,7 +153,7 @@
 		6B7239852DCB4ABC00F46D1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B7239872DCB526E00F46D1E /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		6B89AA4C2DC14EF700A6A90D /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
-		6B89AA512DC155E300A6A90D /* SignInError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInError.swift; sourceTree = "<group>"; };
+		6B89AA512DC155E300A6A90D /* AuthenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenError.swift; sourceTree = "<group>"; };
 		6B89AA5F2DC2072900A6A90D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		6B89AA612DC2073A00A6A90D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6B89AA632DC31F8F00A6A90D /* HomeListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListItemView.swift; sourceTree = "<group>"; };
@@ -146,7 +163,6 @@
 		6B89AA6D2DC32CD100A6A90D /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
 		6B89AA6F2DC32CE000A6A90D /* NewPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordView.swift; sourceTree = "<group>"; };
 		6B89AA712DC3424300A6A90D /* PasswordItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordItemModel.swift; sourceTree = "<group>"; };
-		6B89AA732DC3427900A6A90D /* PasswordListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListItemView.swift; sourceTree = "<group>"; };
 		6BAA74542DD3B2160007B773 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		6BAA74602DD3B8A20007B773 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BAA74632DD3B8A40007B773 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -246,6 +262,7 @@
 		6B4D8BBC2DC0C93B00103278 /* Passtify */ = {
 			isa = PBXGroup;
 			children = (
+				6B52F2722DDE3B41005C78B8 /* Assembly */,
 				6BAA74A02DD89B270007B773 /* Passtify.entitlements */,
 				6BAA74512DD3B1D90007B773 /* Localizable */,
 				6BF4739C2DCE527B00CA10B3 /* Helper */,
@@ -292,10 +309,21 @@
 			path = PasstifyUITests;
 			sourceTree = "<group>";
 		};
+		6B52F2722DDE3B41005C78B8 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6B52F2732DDE3B5E005C78B8 /* AppSessionAssembly.swift */,
+				6B6F95452DC0CEDC00C689FE /* CoordinatorAssembly.swift */,
+				6B6F954C2DC0CEF100C689FE /* ServiceAssembly.swift */,
+				6B6F954D2DC0CEF100C689FE /* AppAssembler.swift */,
+				6B6F954F2DC0CEF100C689FE /* ViewModelAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		6B6F95442DC0CEDC00C689FE /* AppCoordinator */ = {
 			isa = PBXGroup;
 			children = (
-				6B6F95452DC0CEDC00C689FE /* CoordinatorAssembly.swift */,
 				6B6F95462DC0CEDC00C689FE /* AppRootCoordinator.swift */,
 				6B6F95472DC0CEDC00C689FE /* AppRootCoordinatorView.swift */,
 			);
@@ -305,10 +333,7 @@
 		6B6F954B2DC0CEF100C689FE /* Architecture */ = {
 			isa = PBXGroup;
 			children = (
-				6B6F954C2DC0CEF100C689FE /* ServiceAssembly.swift */,
-				6B6F954D2DC0CEF100C689FE /* AppAssembler.swift */,
 				6B6F954E2DC0CEF100C689FE /* ViewModel.swift */,
-				6B6F954F2DC0CEF100C689FE /* ViewModelAssembly.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -398,7 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				6BF473A22DCE5A6700CA10B3 /* ExportError.swift */,
-				6B89AA512DC155E300A6A90D /* SignInError.swift */,
+				6B89AA512DC155E300A6A90D /* AuthenError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -429,7 +454,6 @@
 				6B7239712DCB15C800F46D1E /* DeletedPassword */,
 				6BD94B362DC8B7E8005BF242 /* DetailPassword */,
 				6B89AA6C2DC32CC700A6A90D /* NewPassword */,
-				6B89AA732DC3427900A6A90D /* PasswordListItemView.swift */,
 			);
 			path = Password;
 			sourceTree = "<group>";
@@ -499,6 +523,7 @@
 				6BAA749B2DD89ACB0007B773 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
+				6BAA74E92DDBADBF0007B773 /* PBXBuildRule */,
 			);
 			dependencies = (
 				6BAA74992DD89ACB0007B773 /* PBXTargetDependency */,
@@ -672,7 +697,6 @@
 				6BF473A32DCE5A6C00CA10B3 /* ExportError.swift in Sources */,
 				6BF4739B2DCE41BF00CA10B3 /* DeletedPasswordListEmptyView.swift in Sources */,
 				6B89AA6E2DC32CD600A6A90D /* NewPasswordViewModel.swift in Sources */,
-				6B89AA742DC3428D00A6A90D /* PasswordListItemView.swift in Sources */,
 				6B6F95482DC0CEDC00C689FE /* CoordinatorAssembly.swift in Sources */,
 				6BAA74692DD4FF660007B773 /* String+Extensions.swift in Sources */,
 				6B89AA662DC3257800A6A90D /* HomeItemCategoryModel.swift in Sources */,
@@ -681,6 +705,7 @@
 				6BCF43352DC137B500269B4B /* AppDelegate.swift in Sources */,
 				6BD94B382DC8B808005BF242 /* DetailPasswordViewModel.swift in Sources */,
 				6BAA74552DD3B2170007B773 /* LocalizationManager.swift in Sources */,
+				6B52F2742DDE3B66005C78B8 /* AppSessionAssembly.swift in Sources */,
 				6BAA74A62DD8BF750007B773 /* AppConstants.swift in Sources */,
 				6B89AA4D2DC14F0200A6A90D /* UIApplication+Extensions.swift in Sources */,
 				6B6F95512DC0CEF100C689FE /* AppAssembler.swift in Sources */,
@@ -692,7 +717,7 @@
 				6BF224AA2DC38BC00077F204 /* PasswordService.swift in Sources */,
 				6B89AA642DC31F9300A6A90D /* HomeListItemView.swift in Sources */,
 				6B7239802DCB478D00F46D1E /* AuthenticationView.swift in Sources */,
-				6B89AA522DC155E500A6A90D /* SignInError.swift in Sources */,
+				6B89AA522DC155E500A6A90D /* AuthenError.swift in Sources */,
 				6BF473972DCE404100CA10B3 /* PasswordListEmptyView.swift in Sources */,
 				6BF4739E2DCE528000CA10B3 /* OverlayToastView.swift in Sources */,
 				6BF473A12DCE560D00CA10B3 /* ToastManager.swift in Sources */,
@@ -732,10 +757,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BAA74A32DD8B9B50007B773 /* PasswordItemModel.swift in Sources */,
+				6B52F2762DDE44D8005C78B8 /* String+Extensions.swift in Sources */,
 				6BAA74A72DD8C4890007B773 /* CryptoManager.swift in Sources */,
 				6BAA74A92DD8DEA60007B773 /* AuthService.swift in Sources */,
 				6BAA74AD2DD9980A0007B773 /* PasswordService.swift in Sources */,
 				6BAA74A82DD8C4930007B773 /* AppConstants.swift in Sources */,
+				6B52F2752DDE3D7F005C78B8 /* AuthenError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +925,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Passtify/Passtify.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -919,7 +947,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.longphan.passtify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -940,6 +968,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Passtify/Passtify.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -961,7 +990,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = dev.longphan.passtify;
 				PRODUCT_NAME = "$(TARGET_NAME)";

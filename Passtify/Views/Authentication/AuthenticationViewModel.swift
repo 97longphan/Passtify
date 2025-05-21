@@ -10,28 +10,33 @@ import Combine
 
 final class AuthenticationViewModel: ObservableObject {
     private let authService: AuthServiceProtocol
-    private(set) var didCancelLastAttempt = false
+    private let session: AppSession
+    private var cancellables = Set<AnyCancellable>()
+    @Published var errorMessage: String?
     
-    init(authService: AuthServiceProtocol) {
+    init(authService: AuthServiceProtocol,
+         session: AppSession) {
         self.authService = authService
+        self.session = session
     }
     
-    func authenticate(completion: @escaping (Bool) -> Void = { _ in }) {
-        #if targetEnvironment(simulator)
+    func authenticate() {
+    #if targetEnvironment(simulator)
         completion(true)
-        #else
-        authService.authenticateUser { [weak self] success, errorCode in
-            DispatchQueue.main.async {
-                if success {
-                    self?.didCancelLastAttempt = false
-                } else {
-                    if errorCode == .userCancel || errorCode == .systemCancel {
-                        self?.didCancelLastAttempt = true
-                    }
+    #else
+        authService.authenticateUser()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.errorMessage = error.msg
+                default:
+                    break
                 }
-                completion(success)
+            } receiveValue: { [weak self] in
+                self?.session.isAuthenticated = true
             }
-        }
-        #endif
+            .store(in: &cancellables)
+    #endif
     }
 }

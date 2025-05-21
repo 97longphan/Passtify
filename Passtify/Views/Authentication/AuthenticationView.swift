@@ -12,6 +12,7 @@ struct AuthenticationView: View {
     @EnvironmentObject var session: AppSession
     @ObservedObject var viewModel: AuthenticationViewModel
     @ObservedObject var lang = LocalizationManager.shared
+    @EnvironmentObject var toastManager: ToastManager
     
     var body: some View {
         ZStack {
@@ -28,11 +29,7 @@ struct AuthenticationView: View {
                         .foregroundColor(.primary)
                     
                     Button("key.unlock".localized) {
-                        viewModel.authenticate { success in
-                            if success {
-                                session.isAuthenticated = true
-                            }
-                        }
+                        viewModel.authenticate()
                     }
                     .font(.headline)
                     .foregroundColor(Color.blue)
@@ -52,15 +49,17 @@ struct AuthenticationView: View {
         }) {
             Text(lang.currentLanguage.toggled.flag)
             .font(.system(size: 24))}
-        )
-        .onChange(of: scenePhase) { newValue in
-            if newValue == .active && !viewModel.didCancelLastAttempt {
-                viewModel.authenticate { success in
-                    if success {
-                        session.isAuthenticated = true
-                    }
-                }
-            }
+        ).onReceive(viewModel.$errorMessage.compactMap { $0 }) { msg in
+            toastManager.show(msg, type: .error)
         }
+        //        .onChange(of: scenePhase) { newValue in
+        //            if newValue == .active  {
+        //                viewModel.authenticate { success in
+        //                    if success {
+        //                        session.isAuthenticated = true
+        //                    }
+        //                }
+        //            }
+        //        }
     }
 }

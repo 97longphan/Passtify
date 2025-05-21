@@ -15,7 +15,7 @@ final class AppSession: ObservableObject {
 @main
 struct PasstifyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var session = AppSession()
+    @StateObject private var session: AppSession = appAssembler.resolver.resolved(AppSession.self)
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var toastManager = ToastManager()
     
