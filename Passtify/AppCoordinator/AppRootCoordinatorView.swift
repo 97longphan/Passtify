@@ -14,9 +14,13 @@ struct AppRootCoordinatorView: View {
     @EnvironmentObject var toastManager: ToastManager
     
     var body: some View {
-        if session.isAuthenticated {
+        switch session.authState {
+        case .authenticating, .locked:
             ZStack {
-                homeView()
+                NavigationStack {
+                    AuthenticationView(viewModel: coordinator.authenViewModel)
+                }
+
                 if toastManager.isPresented {
                     VStack {
                         Spacer()
@@ -26,14 +30,9 @@ struct AppRootCoordinatorView: View {
                     }
                 }
             }
-            
-            
-        } else {
+        case .unlocked:
             ZStack {
-                NavigationStack {
-                    AuthenticationView(viewModel: coordinator.authenViewModel)
-                }
-
+                homeView()
                 if toastManager.isPresented {
                     VStack {
                         Spacer()

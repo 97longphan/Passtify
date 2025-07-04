@@ -19,7 +19,8 @@ enum AuthenError: Error {
     case appCancel
     case invalidContext
     case notInteractive
-
+    case userCancel
+    
     var msg: String {
         switch self {
         case .authenticationFailed:
@@ -44,6 +45,16 @@ enum AuthenError: Error {
             return "authen.not_interactive".localized
         case .unknown:
             return "authen.unknown".localized
+        case .userCancel:
+            return "authen.user_cancel".localized
+        }
+    }
+    
+    var needShowToastError: Bool {
+        switch self {
+        case .passcodeNotSet, .biometryNotAvailable, .biometryNotEnrolled, .biometryLockout:
+            return true
+        default: return false
         }
     }
 
@@ -59,6 +70,7 @@ enum AuthenError: Error {
         case .appCancel: return .appCancel
         case .invalidContext: return .invalidContext
         case .notInteractive: return .notInteractive
+        case .userCancel: return .userCancel
         default: return .unknown
         }
     }

@@ -72,6 +72,7 @@
 "authen.invalid_context" = "Invalid authentication context";
 "authen.not_interactive" = "Authentication failed because UI is not interactive";
 "authen.unknown" = "Unknown error occurred";
+"authen.user_cancel" = "You cancelled authentication";
 
 "message.export_success" = "Export successful";
 "message.import_success" = "Import successful";

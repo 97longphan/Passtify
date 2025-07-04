@@ -29,7 +29,7 @@ struct AuthenticationView: View {
                         .foregroundColor(.primary)
                     
                     Button("key.unlock".localized) {
-                        viewModel.authenticate()
+                        viewModel.authenticate(.manual)
                     }
                     .font(.headline)
                     .foregroundColor(Color.blue)
@@ -51,15 +51,10 @@ struct AuthenticationView: View {
             .font(.system(size: 24))}
         ).onReceive(viewModel.$toast.compactMap { $0 }) { toast in
             toastManager.show(toast)
+        }.onChange(of: scenePhase) { newValue in
+            if newValue == .active, viewModel.session.authState == .locked {
+                viewModel.authenticate(.automatic)
+            }
         }
-        //        .onChange(of: scenePhase) { newValue in
-        //            if newValue == .active  {
-        //                viewModel.authenticate { success in
-        //                    if success {
-        //                        session.isAuthenticated = true
-        //                    }
-        //                }
-        //            }
-        //        }
     }
 }

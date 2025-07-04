@@ -28,8 +28,6 @@ class AppRootCoordinator: ObservableObject {
     @Published private(set) var authenViewModel: AuthenticationViewModel!
     @Published var exportFileURL: ExportFile?
     @Published var isImportingZip: Bool = false
-    private let authService: AuthServiceProtocol = AuthService()
-    
     
     let resolver: Resolver
     

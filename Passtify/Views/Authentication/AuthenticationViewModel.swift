@@ -7,10 +7,20 @@
 
 import Foundation
 import Combine
+enum AuthState {
+    case locked
+    case authenticating
+    case unlocked
+}
+
+enum AuthTrigger {
+    case automatic  // Ví dụ: khi vào view, khi app active
+    case manual     // Người dùng bấm nút
+}
 
 final class AuthenticationViewModel: ObservableObject {
     private let authService: AuthServiceProtocol
-    private let session: AppSession
+    let session: AppSession
     private var cancellables = Set<AnyCancellable>()
     @Published var toast: Toast?
     
@@ -20,23 +30,36 @@ final class AuthenticationViewModel: ObservableObject {
         self.session = session
     }
     
-    func authenticate() {
-    #if targetEnvironment(simulator)
-        session.isAuthenticated = true
-    #else
+    func authenticate(_ authTrigger: AuthTrigger) {
+#if targetEnvironment(simulator)
+        session.authState = .unlocked
+#else
+        switch authTrigger {
+        case .automatic:
+            guard session.authState != .authenticating else { return }
+            session.authState = .authenticating
+            startAuthen()
+        case .manual:
+            startAuthen()
+        }
+#endif
+    }
+    
+    private func startAuthen() {
         authService.authenticateUser()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    self?.toast = Toast(message: error.msg, type: .error)
-                default:
+                    if error.needShowToastError {
+                        self?.toast = Toast(message: error.msg, type: .error)
+                    }
+                case .finished:
                     break
                 }
             } receiveValue: { [weak self] in
-                self?.session.isAuthenticated = true
+                self?.session.authState = .unlocked
             }
             .store(in: &cancellables)
-    #endif
     }
 }

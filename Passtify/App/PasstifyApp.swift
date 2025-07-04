@@ -9,7 +9,7 @@ import SwiftUI
 private let appAssembler: AppAssembler = AppAssembler()
 
 final class AppSession: ObservableObject {
-    @Published var isAuthenticated: Bool = false
+    @Published var authState: AuthState = .locked
 }
 
 @main
@@ -26,7 +26,7 @@ struct PasstifyApp: App {
                 .environmentObject(toastManager)
         }.onChange(of: scenePhase) { newValue in
             if newValue == .background {
-                session.isAuthenticated = false
+                session.authState = .locked
             }
         }
     }
