@@ -13,6 +13,7 @@ struct DetailPasswordView: View {
     @State private var tempItem: PasswordItemModel = .empty
     @State private var showActionSheetDelete = false
     @EnvironmentObject var toastManager: ToastManager
+    @State private var isPasswordVisible = false
     
     var body: some View {
         ScrollView {
@@ -93,9 +94,14 @@ struct DetailPasswordView: View {
         VStack(spacing: 12) {
             InfoRow(title: "key.username".localized, value: viewModel.passwordItem.userName) {
                 copyToClipboard(viewModel.passwordItem.userName, label: "key.username".localized)
+            } onTapButton: {
+                copyToClipboard(viewModel.passwordItem.userName, label: "key.username".localized)
             }
-            InfoRow(title: "key.password".localized, value: "••••••••") {
-                copyToClipboard(viewModel.passwordItem.password, label: "key.password".localized)
+            
+            InfoRow(title: "key.username".localized, value: isPasswordVisible ? viewModel.passwordItem.password : "••••••••") {
+                isPasswordVisible = true
+            } onTapButton: {
+                copyToClipboard(viewModel.passwordItem.userName, label: "key.password".localized)
             }
         }
         .padding()
@@ -214,7 +220,12 @@ struct DetailPasswordView: View {
         }
     }
     
-    private func InfoRow(title: String, value: String, onTap: @escaping () -> Void) -> some View {
+    private func InfoRow(
+        title: String,
+        value: String,
+        onTapText: @escaping () -> Void,
+        onTapButton: @escaping () -> Void
+    ) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
@@ -223,13 +234,21 @@ struct DetailPasswordView: View {
                 Text(value)
                     .font(.body)
                     .foregroundColor(.primary)
+                    .padding(8)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        onTapText()
+                    }
             }
             Spacer()
-            Button(action: onTap) {
+            Button(action: {
+                onTapButton()
+            }) {
                 Image(systemName: "doc.on.doc")
             }
         }
     }
+    
     
     private func EditableRow(title: String, text: Binding<String>, keyboardType: UIKeyboardType = .default) -> some View {
         VStack(alignment: .leading, spacing: 4) {
