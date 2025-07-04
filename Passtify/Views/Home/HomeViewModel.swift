@@ -20,7 +20,7 @@ class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let passwordService: PasswordServiceProtocol
     private let fileService: FileServiceProtocol
-    @Published var toastMessage: String? = nil
+    @Published var toast: Toast?
     
     init(passwordService: PasswordServiceProtocol, fileService: FileServiceProtocol) {
         self.passwordService = passwordService
@@ -47,7 +47,7 @@ class HomeViewModel: ObservableObject {
             fileService.exportEncryptedDataAsZip()
                 .sink { [weak self] completion in
                     if case .failure(let error) = completion {
-                        self?.toastMessage = error.msg
+                        self?.toast = Toast(message: error.msg, type: .error)
                     }
                 } receiveValue: { [weak self] url in
                     self?.delegate?.didExportData(url: url)
@@ -64,6 +64,7 @@ class HomeViewModel: ObservableObject {
                     print("Import failed:", error)
                 }
             } receiveValue: { [weak self] _ in
+                self?.toast =  Toast(message: "message.import".localized, type: .normal)
                 self?.loadCount()
             }.store(in: &cancellables)
     }

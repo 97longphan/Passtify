@@ -9,28 +9,47 @@ import AuthenticationServices
 import LocalAuthentication
 import SwiftUI
 
-final class CredentialProviderViewController: ASCredentialProviderViewController {
+final class CredentialProviderViewController: ASCredentialProviderViewController, UIAdaptivePresentationControllerDelegate {
     
     private let viewModel = CredentialProviderViewModel()
     
     override func prepareCredentialList(for serviceIdentifiers: [ASCredentialServiceIdentifier]) {
-        viewModel.loadMatchedCredentials(for: serviceIdentifiers) { [weak self] in
-            self?.showSwiftUI()
+        viewModel.onDismissNewPassword = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+
+        viewModel.onDidCreatedNewPassword = { [weak self] in
+            self?.dismiss(animated: true) {
+                self?.viewModel.loadMatchedCredentials()
+            }
+        }
+
+        viewModel.serviceIdentifiers = serviceIdentifiers
+        viewModel.loadMatchedCredentials() { [weak self] in
+            guard let self = self else { return }
+            if self.children.isEmpty {
+                self.showSwiftUI()
+            }
         }
     }
     
     private func showSwiftUI() {
         let view = CredentialRootView(
-            credentials: viewModel.credentials,
-            onSelect: { selected in
+            viewModel: viewModel,
+            onSelect: { [weak self] selected in
                 let credential = ASPasswordCredential(user: selected.userName, password: selected.password)
-                self.extensionContext.completeRequest(withSelectedCredential: credential)
+                self?.extensionContext.completeRequest(withSelectedCredential: credential)
             },
-            onCancel: {
-                self.extensionContext.cancelRequest(withError: NSError(
-                    domain: ASExtensionErrorDomain,
-                    code: ASExtensionError.userCanceled.rawValue
-                ))
+            onCancel: { [weak self] in
+                self?.dismiss(animated: true) {
+                    self?.extensionContext.cancelRequest(withError: NSError(
+                        domain: ASExtensionErrorDomain,
+                        code: ASExtensionError.userCanceled.rawValue
+                    ))
+                }
+            },
+            onCreate: { [weak self] in
+                self?.showNewPassword()
             }
         )
         
@@ -41,30 +60,48 @@ final class CredentialProviderViewController: ASCredentialProviderViewController
         host.didMove(toParent: self)
     }
     
+    
+    private func showNewPassword() {
+        let newPasswordView = viewModel.createNewPassword()
+        let vc = UIHostingController(rootView: newPasswordView)
+        vc.modalPresentationStyle = .formSheet
+        self.present(vc, animated: true)
+    }
+    
     override func provideCredentialWithoutUserInteraction(for credentialIdentity: ASPasswordCredentialIdentity) {
         do {
             let encryptedData = try Data(contentsOf: FilePath.password)
             let decrypted = try CryptoManager.decrypt(encryptedData: encryptedData)
             let decoded: [PasswordItemModel] = try JSONDecoder().decode([PasswordItemModel].self, from: decrypted)
-
+            
             guard let matched = decoded.first(where: {
                 $0.userName == credentialIdentity.user &&
                 $0.domainOrLabel == credentialIdentity.serviceIdentifier.identifier
             }) else {
                 throw NSError(domain: "NoMatch", code: 404)
             }
-
+            
             let credential = ASPasswordCredential(user: matched.userName, password: matched.password)
             extensionContext.completeRequest(withSelectedCredential: credential)
-
+            
         } catch {
             extensionContext.cancelRequest(withError: NSError(
                 domain: ASExtensionErrorDomain,
                 code: ASExtensionError.failed.rawValue
             ))
         }
-
+        
     }
+    
+    
+}
 
-
+extension CredentialProviderViewController {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        // User dismissed bằng gesture hoặc programmatically
+        self.extensionContext.cancelRequest(withError: NSError(
+            domain: ASExtensionErrorDomain,
+            code: ASExtensionError.userCanceled.rawValue
+        ))
+    }
 }

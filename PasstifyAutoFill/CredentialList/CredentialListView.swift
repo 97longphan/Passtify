@@ -11,6 +11,7 @@ struct CredentialListView: View {
     let credentials: [PasswordItemModel]
     let onSelect: (PasswordItemModel) -> Void
     let onCancel: () -> Void
+    let onCreate: () -> Void
     
     var body: some View {
         NavigationView {
@@ -28,6 +29,11 @@ struct CredentialListView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel", action: onCancel)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: onCreate) {
+                        Image(systemName: "plus")
+                    }
                 }
             }.safeAreaInset(edge: .bottom) {
                 Color.clear.frame(height: 50)

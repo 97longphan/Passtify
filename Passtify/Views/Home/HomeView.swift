@@ -62,8 +62,8 @@ struct HomeView: View {
         .onAppear {
             viewModel.loadCount()
         }
-        .onReceive(viewModel.$toastMessage.compactMap { $0 }) { msg in
-            toastManager.show(msg, type: .error)
+        .onReceive(viewModel.$toast.compactMap { $0 }) { toast in
+            toastManager.show(toast)
         }
     }
     

@@ -49,8 +49,8 @@ struct AuthenticationView: View {
         }) {
             Text(lang.currentLanguage.toggled.flag)
             .font(.system(size: 24))}
-        ).onReceive(viewModel.$errorMessage.compactMap { $0 }) { msg in
-            toastManager.show(msg, type: .error)
+        ).onReceive(viewModel.$toast.compactMap { $0 }) { toast in
+            toastManager.show(toast)
         }
         //        .onChange(of: scenePhase) { newValue in
         //            if newValue == .active  {

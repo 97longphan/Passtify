@@ -12,7 +12,7 @@ final class AuthenticationViewModel: ObservableObject {
     private let authService: AuthServiceProtocol
     private let session: AppSession
     private var cancellables = Set<AnyCancellable>()
-    @Published var errorMessage: String?
+    @Published var toast: Toast?
     
     init(authService: AuthServiceProtocol,
          session: AppSession) {
@@ -29,7 +29,7 @@ final class AuthenticationViewModel: ObservableObject {
             .sink { [weak self] completion in
                 switch completion {
                 case .failure(let error):
-                    self?.errorMessage = error.msg
+                    self?.toast = Toast(message: error.msg, type: .error)
                 default:
                     break
                 }

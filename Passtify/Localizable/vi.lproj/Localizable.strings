@@ -72,3 +72,6 @@
 "authen.invalid_context" = "Ngữ cảnh xác thực không hợp lệ";
 "authen.not_interactive" = "Không thể xác thực vì giao diện không tương tác";
 "authen.unknown" = "Lỗi không xác định";
+
+"message.export_success" = "Xuất dữ liệu thành công";
+"message.import_success" = "Nhập dữ liệu thành công";

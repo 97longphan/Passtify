@@ -252,7 +252,7 @@ struct DetailPasswordView: View {
     
     private func copyToClipboard(_ value: String, label: String) {
         UIPasteboard.general.string = value
-        toastManager.show(String(format: "key.copied_value".localized, label))
+        toastManager.show(Toast(message: String(format: "key.copied_value".localized, label), type: .normal))
     }
     
 }

@@ -9,16 +9,19 @@ import Combine
 import Foundation
 import AuthenticationServices
 
-final class CredentialProviderViewModel {
-    var credentials: [PasswordItemModel] = []
+final class CredentialProviderViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let passwordService: PasswordServiceProtocol
+    @Published var credentials: [PasswordItemModel] = []
+    var onDismissNewPassword: (() -> Void)?
+    var onDidCreatedNewPassword: (() -> Void)?
+    var serviceIdentifiers: [ASCredentialServiceIdentifier] = []
     
     init(passwordService: PasswordServiceProtocol = PasswordService()) {
         self.passwordService = passwordService
     }
     
-    func loadMatchedCredentials(for serviceIdentifiers: [ASCredentialServiceIdentifier], completion: @escaping () -> Void) {
+    func loadMatchedCredentials(completion: (() -> Void)? = nil) {
         passwordService.loadPasswords()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completionStatus in
@@ -27,8 +30,34 @@ final class CredentialProviderViewModel {
                 }
             }, receiveValue: { [weak self] data in
                 self?.credentials = data
-                completion()
+                completion?()
             })
             .store(in: &cancellables)
+    }
+    
+    func createNewPassword() -> NewPasswordView {
+        let newVM = NewPasswordViewModel(passwordService: passwordService)
+        var input = PasswordItemModel.empty
+        input.domainOrLabel = serviceIdentifiers.first?.identifier.toDomain ?? ""
+        newVM.input = input
+        _ = newVM.setup(delegate: self)
+        return NewPasswordView(viewModel: newVM)
+    }
+}
+
+extension CredentialProviderViewModel: NewPasswordViewModelDelegate {
+    func dismissNewPassword() {
+        onDismissNewPassword?()
+    }
+    
+    func didCreatedNewPassword() {
+        onDidCreatedNewPassword?()
+    }
+}
+
+extension String {
+    var toDomain: String? {
+        var url = URL(string: self)
+        return url?.host()
     }
 }

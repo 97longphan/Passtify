@@ -10,6 +10,12 @@ import Dispatch
 import Foundation
 import SwiftUI
 
+struct Toast: Equatable {
+    let message: String
+    let type: ToastType
+    let duration: TimeInterval = 2
+}
+
 final class ToastManager: ObservableObject {
     @Published var message: String = ""
     @Published var type: ToastType = .normal
@@ -17,7 +23,7 @@ final class ToastManager: ObservableObject {
     
     private var currentWorkItem: DispatchWorkItem?
     
-    func show(_ message: String, type: ToastType = .normal, duration: TimeInterval = 2) {
+    func show(_ toast: Toast) {
         // Ẩn toast hiện tại nếu đang có
         withAnimation(.easeOut(duration: 0.2)) {
             self.isPresented = false
@@ -28,8 +34,8 @@ final class ToastManager: ObservableObject {
         
         // Delay nhẹ trước khi hiện toast mới
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            self.message = message
-            self.type = type
+            self.message = toast.message
+            self.type = toast.type
             withAnimation(.easeInOut(duration: 0.25)) {
                 self.isPresented = true
             }
@@ -41,7 +47,7 @@ final class ToastManager: ObservableObject {
                 }
             }
             self.currentWorkItem = workItem
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: workItem)
+            DispatchQueue.main.asyncAfter(deadline: .now() + toast.duration, execute: workItem)
         }
     }
 }

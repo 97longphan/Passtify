@@ -9,9 +9,10 @@ import SwiftUI
 import AuthenticationServices
 
 struct CredentialRootView: View {
-    let credentials: [PasswordItemModel]
+    @ObservedObject var viewModel: CredentialProviderViewModel
     let onSelect: (PasswordItemModel) -> Void
     let onCancel: () -> Void
+    let onCreate: () -> Void
 
     @StateObject private var lockScreenViewModel = LockScreenViewModel()
     @State private var isUnlocked = false
@@ -20,7 +21,7 @@ struct CredentialRootView: View {
     var body: some View {
         Group {
             if isUnlocked {
-                CredentialListView(credentials: credentials, onSelect: onSelect, onCancel: onCancel)
+                CredentialListView(credentials: viewModel.credentials, onSelect: onSelect, onCancel: onCancel, onCreate: onCreate)
             } else {
                 LockScreenView(viewModel: lockScreenViewModel)
             }
