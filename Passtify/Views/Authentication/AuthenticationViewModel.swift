@@ -31,7 +31,7 @@ final class AuthenticationViewModel: ObservableObject {
     }
     
     func authenticate(_ authTrigger: AuthTrigger) {
-#if targetEnvironment(simulator)
+#if targetEnvironment(simulator) || DEBUG
         session.authState = .unlocked
 #else
         switch authTrigger {

@@ -77,3 +77,24 @@
 "message.export_success" = "Export successful";
 "message.import_success" = "Import successful";
 
+"key.no_saved_cards" = "No saved cards yet";
+"key.cards_auto_fill_guide" = "Add your bank cards to quickly fill in card info when needed.";
+
+"key.search_card_prompt" = "Search cards";
+"key.my_cards_title" = "Your Cards";
+
+"key.card_number" = "Card number";
+"key.name_on_card" = "Name on card";
+"key.expiry_date" = "Expiry date";
+"key.cvv" = "CVV";
+"key.bank" = "Bank";
+"key.select_bank" = "Select bank";
+"key.add_new_card" = "Add New Card";
+"key.cancel" = "Cancel";
+"key.save" = "Save";
+
+"key.card" = "Card";
+
+"key.title_card" = "Card";
+"key.subtitle_card" = "Securely store your bank card information";
+

@@ -36,7 +36,7 @@ final class PasswordService: PasswordServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
-
+    
     
     func savePasswords(_ passwords: [PasswordItemModel]) -> AnyPublisher<Void, Error> {
         save(passwords, to: FilePath.password)
@@ -111,7 +111,7 @@ final class PasswordService: PasswordServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
-
+    
 }
 
 extension PasswordService {
@@ -158,7 +158,7 @@ extension PasswordService {
                 recordIdentifier: item.id.uuidString
             )
         }
-
+        
         ASCredentialIdentityStore.shared.replaceCredentialIdentities(with: identities) { success, error in
             if success {
                 print("✅ Saved \(identities.count) credential identities")
@@ -168,5 +168,5 @@ extension PasswordService {
         }
         
     }
-
+    
 }

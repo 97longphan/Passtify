@@ -76,8 +76,3 @@ struct NewPasswordView: View {
         }
     }
 }
-
-
-#Preview {
-    NewPasswordView(viewModel: NewPasswordViewModel(passwordService: PasswordService()))
-}

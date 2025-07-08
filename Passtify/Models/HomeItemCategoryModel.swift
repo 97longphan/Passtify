@@ -16,10 +16,12 @@ struct HomeItemCategoryModel: Identifiable {
 enum HomeItemCategoryGroup {
     case password
     case data
+    case card
 }
 
 enum HomeItemCategoryType: CaseIterable, Identifiable {
     case password
+    case card
     case deleted
     case importData
     case exportData
@@ -32,6 +34,7 @@ enum HomeItemCategoryType: CaseIterable, Identifiable {
         case .deleted: return "key.title_deleted".localized
         case .importData: return "key.title_import".localized
         case .exportData: return "key.title_export".localized
+        case .card: return "key.title_card".localized
         }
     }
 
@@ -41,6 +44,7 @@ enum HomeItemCategoryType: CaseIterable, Identifiable {
         case .deleted: return "key.subtitle_deleted".localized
         case .importData: return "key.subtitle_import".localized
         case .exportData: return "key.subtitle_export".localized
+        case .card: return "key.subtitle_card".localized
         }
     }
 
@@ -50,6 +54,8 @@ enum HomeItemCategoryType: CaseIterable, Identifiable {
         case .deleted: return "trash.fill"
         case .importData: return "square.and.arrow.down.fill"
         case .exportData: return "square.and.arrow.up.fill"
+        case .card: return "creditcard"
+
         }
     }
 
@@ -59,12 +65,13 @@ enum HomeItemCategoryType: CaseIterable, Identifiable {
         case .deleted: return .red
         case .importData: return .green
         case .exportData: return .orange
+        case .card: return .pink
         }
     }
 
     var isShowCount: Bool {
         switch self {
-        case .password, .deleted: return true
+        case .password, .deleted, .card: return true
         default: return false
         }
     }
@@ -73,6 +80,7 @@ enum HomeItemCategoryType: CaseIterable, Identifiable {
         switch self {
         case .password, .deleted: return .password
         case .importData, .exportData: return .data
+        case .card: return .card
         }
     }
 }

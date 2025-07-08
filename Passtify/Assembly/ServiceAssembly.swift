@@ -20,5 +20,9 @@ class ServiceAssembly: Assembly {
         container.register(AuthServiceProtocol.self) { r in
             AuthService()
         }.inObjectScope(.transient) // Luôn tạo mới mỗi lần resolve. Không giữ lại.
+        
+        container.register(CardServiceProtocol.self) { r in
+            CardService()
+        }.inObjectScope(.transient)
     }
 }

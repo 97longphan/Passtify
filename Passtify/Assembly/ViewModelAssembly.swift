@@ -27,7 +27,7 @@ class ViewModelAssembly: Assembly {
         }.inObjectScope(.transient)
         
         container.register(HomeViewModel.self) { r in
-            HomeViewModel(passwordService: r.resolved(PasswordServiceProtocol.self), fileService: r.resolved(FileServiceProtocol.self))
+            HomeViewModel(passwordService: r.resolved(PasswordServiceProtocol.self), fileService: r.resolved(FileServiceProtocol.self), cardService: r.resolved(CardServiceProtocol.self))
         }.inObjectScope(.transient)
         
         container.register(PasswordListViewModel.self) { r in
@@ -36,6 +36,14 @@ class ViewModelAssembly: Assembly {
         
         container.register(NewPasswordViewModel.self) { r in
             NewPasswordViewModel(passwordService: r.resolved(PasswordServiceProtocol.self))
+        }.inObjectScope(.transient)
+        
+        container.register(CardListViewModel.self) { r in
+            CardListViewModel(cardService: r.resolved(CardServiceProtocol.self))
+        }.inObjectScope(.transient)
+        
+        container.register(NewCardViewModel.self) { r in
+            NewCardViewModel(cardService: r.resolved(CardServiceProtocol.self))
         }.inObjectScope(.transient)
     }
 }

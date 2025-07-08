@@ -43,6 +43,14 @@
 		6B89AA6E2DC32CD600A6A90D /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA6D2DC32CD100A6A90D /* NewPasswordViewModel.swift */; };
 		6B89AA702DC32CE000A6A90D /* NewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA6F2DC32CE000A6A90D /* NewPasswordView.swift */; };
 		6B89AA722DC3424700A6A90D /* PasswordItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA712DC3424300A6A90D /* PasswordItemModel.swift */; };
+		6BA024432E1BB53E003708D4 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA024412E1BB53E003708D4 /* NewCardView.swift */; };
+		6BA024442E1BB53E003708D4 /* NewCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA024422E1BB53E003708D4 /* NewCardViewModel.swift */; };
+		6BA024462E1CC0BC003708D4 /* CardListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA024452E1CC0AA003708D4 /* CardListItemView.swift */; };
+		6BA024482E1CC387003708D4 /* CardItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA024472E1CC37D003708D4 /* CardItemModel.swift */; };
+		6BA024492E1CC387003708D4 /* CardItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA024472E1CC37D003708D4 /* CardItemModel.swift */; };
+		6BA0244B2E1CC676003708D4 /* CardListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA0244A2E1CC670003708D4 /* CardListEmptyView.swift */; };
+		6BA0244D2E1D0960003708D4 /* CardServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA0244C2E1D0955003708D4 /* CardServices.swift */; };
+		6BA0244E2E1D0960003708D4 /* CardServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA0244C2E1D0955003708D4 /* CardServices.swift */; };
 		6BAA74552DD3B2170007B773 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74542DD3B2160007B773 /* LocalizationManager.swift */; };
 		6BAA74622DD3B8A20007B773 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BAA74612DD3B8A20007B773 /* Localizable.strings */; };
 		6BAA74692DD4FF660007B773 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAA74682DD4FF550007B773 /* String+Extensions.swift */; };
@@ -61,6 +69,8 @@
 		6BD94B352DC8AFF6005BF242 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD94B342DC8AFEE005BF242 /* View+Extensions.swift */; };
 		6BD94B382DC8B808005BF242 /* DetailPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD94B372DC8B7F7005BF242 /* DetailPasswordViewModel.swift */; };
 		6BD94B3A2DC8B829005BF242 /* DetailPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD94B392DC8B829005BF242 /* DetailPasswordView.swift */; };
+		6BDA877C2E1B83FC00FBABC9 /* CardListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA877B2E1B83EC00FBABC9 /* CardListViewModel.swift */; };
+		6BDA877E2E1B841000FBABC9 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDA877D2E1B840500FBABC9 /* CardListView.swift */; };
 		6BEA2A7B2E1786CB00987A8F /* NewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA6F2DC32CE000A6A90D /* NewPasswordView.swift */; };
 		6BEA2A7C2E1786D100987A8F /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B89AA6D2DC32CD100A6A90D /* NewPasswordViewModel.swift */; };
 		6BEA2A7D2E1787F300987A8F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F954E2DC0CEF100C689FE /* ViewModel.swift */; };
@@ -164,6 +174,12 @@
 		6B89AA6D2DC32CD100A6A90D /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
 		6B89AA6F2DC32CE000A6A90D /* NewPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordView.swift; sourceTree = "<group>"; };
 		6B89AA712DC3424300A6A90D /* PasswordItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordItemModel.swift; sourceTree = "<group>"; };
+		6BA024412E1BB53E003708D4 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
+		6BA024422E1BB53E003708D4 /* NewCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewModel.swift; sourceTree = "<group>"; };
+		6BA024452E1CC0AA003708D4 /* CardListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListItemView.swift; sourceTree = "<group>"; };
+		6BA024472E1CC37D003708D4 /* CardItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemModel.swift; sourceTree = "<group>"; };
+		6BA0244A2E1CC670003708D4 /* CardListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListEmptyView.swift; sourceTree = "<group>"; };
+		6BA0244C2E1D0955003708D4 /* CardServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardServices.swift; sourceTree = "<group>"; };
 		6BAA74542DD3B2160007B773 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		6BAA74602DD3B8A20007B773 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BAA74632DD3B8A40007B773 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -178,6 +194,8 @@
 		6BD94B342DC8AFEE005BF242 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		6BD94B372DC8B7F7005BF242 /* DetailPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPasswordViewModel.swift; sourceTree = "<group>"; };
 		6BD94B392DC8B829005BF242 /* DetailPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPasswordView.swift; sourceTree = "<group>"; };
+		6BDA877B2E1B83EC00FBABC9 /* CardListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewModel.swift; sourceTree = "<group>"; };
+		6BDA877D2E1B840500FBABC9 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		6BF224A92DC38BB10077F204 /* PasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordService.swift; sourceTree = "<group>"; };
 		6BF473962DCE404100CA10B3 /* PasswordListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListEmptyView.swift; sourceTree = "<group>"; };
 		6BF473982DCE407500CA10B3 /* PasswordListCardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListCardItemView.swift; sourceTree = "<group>"; };
@@ -339,6 +357,7 @@
 		6B6F955A2DC0CFA100C689FE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6BDA877A2E1B818000FBABC9 /* Card */,
 				6B72397E2DCB472600F46D1E /* Authentication */,
 				6B89AA672DC32A0000A6A90D /* Password */,
 				6B89AA5E2DC2072400A6A90D /* Home */,
@@ -361,6 +380,7 @@
 		6B6F956E2DC0DBFA00C689FE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6BA0244C2E1D0955003708D4 /* CardServices.swift */,
 				6BD94B2B2DC86D24005BF242 /* FileServices.swift */,
 				6BF224A92DC38BB10077F204 /* PasswordService.swift */,
 				6B6F956F2DC0DC6B00C689FE /* AuthService.swift */,
@@ -429,6 +449,7 @@
 		6B89AA532DC1FDB800A6A90D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6BA024472E1CC37D003708D4 /* CardItemModel.swift */,
 				6B89AA712DC3424300A6A90D /* PasswordItemModel.swift */,
 				6B89AA652DC3257800A6A90D /* HomeItemCategoryModel.swift */,
 			);
@@ -465,6 +486,26 @@
 			path = NewPassword;
 			sourceTree = "<group>";
 		};
+		6BA0243F2E1BB51D003708D4 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				6BA0244A2E1CC670003708D4 /* CardListEmptyView.swift */,
+				6BA024452E1CC0AA003708D4 /* CardListItemView.swift */,
+				6BDA877D2E1B840500FBABC9 /* CardListView.swift */,
+				6BDA877B2E1B83EC00FBABC9 /* CardListViewModel.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		6BA024402E1BB527003708D4 /* NewCard */ = {
+			isa = PBXGroup;
+			children = (
+				6BA024412E1BB53E003708D4 /* NewCardView.swift */,
+				6BA024422E1BB53E003708D4 /* NewCardViewModel.swift */,
+			);
+			path = NewCard;
+			sourceTree = "<group>";
+		};
 		6BAA74512DD3B1D90007B773 /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,6 +530,15 @@
 				6BD94B392DC8B829005BF242 /* DetailPasswordView.swift */,
 			);
 			path = DetailPassword;
+			sourceTree = "<group>";
+		};
+		6BDA877A2E1B818000FBABC9 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				6BA024402E1BB527003708D4 /* NewCard */,
+				6BA0243F2E1BB51D003708D4 /* List */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		6BF4739C2DCE527B00CA10B3 /* Helper */ = {
@@ -686,6 +736,8 @@
 			files = (
 				6B89AA602DC2072C00A6A90D /* HomeViewModel.swift in Sources */,
 				6B6F95492DC0CEDC00C689FE /* AppRootCoordinator.swift in Sources */,
+				6BA024432E1BB53E003708D4 /* NewCardView.swift in Sources */,
+				6BA024442E1BB53E003708D4 /* NewCardViewModel.swift in Sources */,
 				6BD94B352DC8AFF6005BF242 /* View+Extensions.swift in Sources */,
 				6BD94B3A2DC8B829005BF242 /* DetailPasswordView.swift in Sources */,
 				6B3324C42DCE8F51009D2DAD /* Bundle+Extensions.swift in Sources */,
@@ -700,7 +752,9 @@
 				6B89AA692DC32A2200A6A90D /* PasswordListViewModel.swift in Sources */,
 				6B6F95532DC0CEF100C689FE /* ViewModelAssembly.swift in Sources */,
 				6BCF43352DC137B500269B4B /* AppDelegate.swift in Sources */,
+				6BA0244E2E1D0960003708D4 /* CardServices.swift in Sources */,
 				6BD94B382DC8B808005BF242 /* DetailPasswordViewModel.swift in Sources */,
+				6BA024462E1CC0BC003708D4 /* CardListItemView.swift in Sources */,
 				6BAA74552DD3B2170007B773 /* LocalizationManager.swift in Sources */,
 				6B52F2742DDE3B66005C78B8 /* AppSessionAssembly.swift in Sources */,
 				6BAA74A62DD8BF750007B773 /* AppConstants.swift in Sources */,
@@ -721,11 +775,15 @@
 				6B7239752DCB16F100F46D1E /* DeletedPasswordListView.swift in Sources */,
 				6B7239762DCB16F100F46D1E /* DeletedPasswordListViewModel.swift in Sources */,
 				6B72397C2DCB1D9300F46D1E /* DetailDeletedPasswordViewModel.swift in Sources */,
+				6BA024482E1CC387003708D4 /* CardItemModel.swift in Sources */,
 				6B72397D2DCB1D9300F46D1E /* DetailDeletedPasswordView.swift in Sources */,
+				6BDA877C2E1B83FC00FBABC9 /* CardListViewModel.swift in Sources */,
 				6B6F95622DC0D14800C689FE /* Resolver+Extensions.swift in Sources */,
 				6B6F95522DC0CEF100C689FE /* ViewModel.swift in Sources */,
 				6BD94B2A2DC86CD2005BF242 /* CryptoManager.swift in Sources */,
+				6BA0244B2E1CC676003708D4 /* CardListEmptyView.swift in Sources */,
 				6B7239882DCB527500F46D1E /* AuthenticationViewModel.swift in Sources */,
+				6BDA877E2E1B841000FBABC9 /* CardListView.swift in Sources */,
 				6BD94B2C2DC86D2D005BF242 /* FileServices.swift in Sources */,
 				6B89AA622DC2073A00A6A90D /* HomeView.swift in Sources */,
 				6B4D8BBE2DC0C93B00103278 /* PasstifyApp.swift in Sources */,
@@ -753,6 +811,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BA024492E1CC387003708D4 /* CardItemModel.swift in Sources */,
+				6BA0244D2E1D0960003708D4 /* CardServices.swift in Sources */,
 				6BAA74A32DD8B9B50007B773 /* PasswordItemModel.swift in Sources */,
 				6B52F2762DDE44D8005C78B8 /* String+Extensions.swift in Sources */,
 				6BAA74A72DD8C4890007B773 /* CryptoManager.swift in Sources */,

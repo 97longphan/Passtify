@@ -13,6 +13,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func didPressDeletedPassword()
     func didExportData(url: URL)
     func didImportData()
+    func didPressCard()
 }
 
 class HomeViewModel: ObservableObject {
@@ -20,11 +21,13 @@ class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let passwordService: PasswordServiceProtocol
     private let fileService: FileServiceProtocol
+    private let cardService: CardServiceProtocol
     @Published var toast: Toast?
     
-    init(passwordService: PasswordServiceProtocol, fileService: FileServiceProtocol) {
+    init(passwordService: PasswordServiceProtocol, fileService: FileServiceProtocol, cardService: CardServiceProtocol) {
         self.passwordService = passwordService
         self.fileService = fileService
+        self.cardService = cardService
     }
     
     @Published var categories: [HomeItemCategoryModel] = HomeItemCategoryType.allCases.map {
@@ -54,6 +57,8 @@ class HomeViewModel: ObservableObject {
                 }.store(in: &cancellables)
         case .importData:
             delegate?.didImportData()
+        case .card:
+            delegate?.didPressCard()
         }
     }
     
@@ -93,6 +98,16 @@ class HomeViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] deleted in
                 self?.updateCount(for: .deleted, count: deleted.count)
+            }
+            .store(in: &cancellables)
+        
+        cardService.loadCards()
+            .sink { completion in
+                if case let .failure(error) = completion {
+                    print(error)
+                }
+            } receiveValue: { [weak self] cards in
+                self?.updateCount(for: .card, count: cards.count)
             }
             .store(in: &cancellables)
     }

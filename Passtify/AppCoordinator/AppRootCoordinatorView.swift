@@ -59,11 +59,16 @@ struct AppRootCoordinatorView: View {
                         DeletedPasswordListView(viewModel: vm)
                     case .deletedDetailPassword(let vm):
                         DetailDeletedPasswordView(viewModel: vm)
+                    case .cardList(let vm):
+                        CardListView(viewModel: vm)
                     }
                 }
         }
         .sheet(item: $coordinator.newPasswordViewModel) { vm in
             NewPasswordView(viewModel: vm)
+        }
+        .sheet(item: $coordinator.newCardViewModel) { vm in
+            NewCardView(viewModel: vm)
         }
         .sheet(item: $coordinator.exportFileURL) { file in
             ShareSheet(activityItems: [file.url])

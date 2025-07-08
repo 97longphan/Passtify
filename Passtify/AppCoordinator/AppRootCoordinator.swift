@@ -18,12 +18,14 @@ enum AppRoute: Hashable {
     case detailPassword(DetailPasswordViewModel)
     case deletedPasswordList(DeletedPasswordListViewModel)
     case deletedDetailPassword(DetailDeletedPasswordViewModel)
+    case cardList(CardListViewModel)
 }
 
 
 class AppRootCoordinator: ObservableObject {
     @Published var path: [AppRoute] = []
     @Published var newPasswordViewModel: NewPasswordViewModel?
+    @Published var newCardViewModel: NewCardViewModel?
     @Published private(set) var homeViewModel: HomeViewModel!
     @Published private(set) var authenViewModel: AuthenticationViewModel!
     @Published var exportFileURL: ExportFile?
@@ -40,6 +42,11 @@ class AppRootCoordinator: ObservableObject {
     func pushToPasswordList() {
         let vm = resolver.resolved(PasswordListViewModel.self).setup(delegate: self)
         path.append(.passwordList(vm))
+    }
+    
+    func pushToCardList() {
+        let vm = resolver.resolved(CardListViewModel.self).setup(delegate: self)
+        path.append(.cardList(vm))
     }
     
     func pushToDetailPassword(item: PasswordItemModel) {
@@ -68,6 +75,10 @@ class AppRootCoordinator: ObservableObject {
     func pop() {
         path.removeLast()
     }
+    
+    func presentAddNewCard() {
+        newCardViewModel = resolver.resolved(NewCardViewModel.self).setup(delegate: self)
+    }
 }
 
 extension AppRootCoordinator {
@@ -80,6 +91,14 @@ extension AppRootCoordinator {
     func reloadDeletedPasswordList() {
         if case let .deletedPasswordList(vm) = path.last {
             vm.loadDeletedPasswords()
+        }
+    }
+}
+
+extension AppRootCoordinator {
+    func reloadCardList() {
+        if case let .cardList(vm) = path.last {
+            vm.loadCards()
         }
     }
 }
@@ -104,6 +123,10 @@ extension AppRootCoordinator: DeletedPasswordListViewModelDelegate {
 }
 
 extension AppRootCoordinator: HomeViewModelDelegate {
+    func didPressCard() {
+        pushToCardList()
+    }
+    
     func didImportData() {
         isImportingZip = true
     }
@@ -149,3 +172,24 @@ extension AppRootCoordinator: NewPasswordViewModelDelegate {
     }
 }
 
+
+extension AppRootCoordinator: CardListViewModelDelegate {
+    func didSelectCard() {
+        //
+    }
+    
+    func didAddNewCard() {
+        presentAddNewCard()
+    }
+}
+
+extension AppRootCoordinator: NewCardViewModelDelegate {
+    func dismissNewCard() {
+        newCardViewModel = nil
+    }
+    
+    func didAddedNewCard() {
+        newCardViewModel = nil
+        reloadCardList()
+    }
+}

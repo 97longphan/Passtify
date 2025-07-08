@@ -76,3 +76,24 @@
 
 "message.export_success" = "Xuất dữ liệu thành công";
 "message.import_success" = "Nhập dữ liệu thành công";
+
+"key.no_saved_cards" = "Chưa có thẻ nào được lưu";
+"key.cards_auto_fill_guide" = "Thêm thẻ ngân hàng để tự động điền thông tin khi cần thiết.";
+
+"key.search_card_prompt" = "Tìm kiếm thẻ";
+"key.my_cards_title" = "Thẻ của bạn";
+
+"key.card_number" = "Số thẻ";
+"key.name_on_card" = "Tên chủ thẻ";
+"key.expiry_date" = "Ngày hết hạn";
+"key.cvv" = "CVV";
+"key.bank" = "Ngân hàng";
+"key.select_bank" = "Chọn ngân hàng";
+"key.add_new_card" = "Thêm thẻ mới";
+"key.cancel" = "Huỷ";
+"key.save" = "Lưu";
+
+"key.card" = "Thẻ";
+
+"key.title_card" = "Thẻ";
+"key.subtitle_card" = "Lưu trữ thông tin thẻ ngân hàng một cách an toàn";

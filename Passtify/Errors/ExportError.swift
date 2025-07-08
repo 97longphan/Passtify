@@ -23,3 +23,13 @@ enum ExportError: Error {
     }
 }
 
+enum ImportError: Error {
+    case noFile
+
+    var msg: String {
+        switch self {
+        case .noFile:
+            return "key.export_no_file".localized
+        }
+    }
+}

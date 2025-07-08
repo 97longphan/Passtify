@@ -12,6 +12,7 @@ enum Constants {
         static let password = "passwords.enc"
         static let deletedPassword = "deletepasswords.enc"
         static let zipBackup = "PasswordsBackup.zip"
+        static let card = "card.enc"
     }
     
     enum TempDirectory {
@@ -24,6 +25,12 @@ enum Constants {
     
     enum AppPassword {
         
+    }
+    
+    enum AppCard {
+        static let validCardNumberLength = 16
+        static let validCVVLength = 3
+        static let validExpiryLength = 5
     }
 }
 
@@ -41,5 +48,9 @@ enum FilePath {
 
     static var deletedPassword: URL {
         containerURL.appendingPathComponent(Constants.FileName.deletedPassword)
+    }
+    
+    static var card: URL {
+        containerURL.appendingPathComponent(Constants.FileName.card)
     }
 }

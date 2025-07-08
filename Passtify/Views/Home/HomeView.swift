@@ -22,6 +22,17 @@ struct HomeView: View {
                 }
             }
             
+            // CARD SECTION
+            Section(header: Text("key.card".localized)) {
+                ForEach(viewModel.categories.filter { $0.type.group == .card }) { item in
+                    Button {
+                        viewModel.handleCategoryTap(item: item)
+                    } label: {
+                        HomeListItemView(item: item)
+                    }
+                }
+            }
+            
             // DATA SECTION
             Section(header: Text("key.data".localized)) {
                 ForEach(viewModel.categories.filter { $0.type.group == .data }) { item in
